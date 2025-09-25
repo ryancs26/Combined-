@@ -1,1 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inservio Health — Pay Invoice</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #5b6472;
+
+      /* Brand colours */
+      --inv-teal: #098276;
+      --inv-lime: #BEF21C;
+      --text-grey: #a9aab0;
+
+      /* Existing aliases (kept for compatibility) */
+      --primary: #0ea5a3;
+      --primary-strong:#0a7f7d;
+      --accent: #c6fb41;  /* lime accent (unused for buttons) */
+
+      --radius: 22px;
+      --maxw: 1040px;
+      --ring: 0 22px 48px rgba(15,23,42,.10);
+    }
+
+    html,body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, #e8fbff 0, transparent 60%),
+        radial-gradient(900px 500px at -10% 0, #f1ffe6 0, transparent 55%),
+        var(--bg);
+      scroll-behavior:smooth;
+    }
+
+      /* NAVBAR */
+    .navbar{ position:sticky; top:0; z-index:10; background:#fff; }
+    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; }
+    .brand img{ height:34px; width:auto; display:block; }
+    .nav-links{ display:flex; gap:22px; }
+    .nav-links a{ font-weight:700; color:#000; text-decoration:none; }
+    .navbar .lime-bar{ height:4px; background:var(--accent); }
+
+    /* HERO */
+    .hero{ position:relative; width:100%; height:100vh; overflow:hidden; }
+    .hero video{ width:100%; height:100%; object-fit:cover; }
+    .hero-text{
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      color:#fff; font-size:36px; font-weight:600; text-align:center;
+      text-shadow:2px 2px 6px rgba(0,0,0,.4); padding:20px;
+    }
+
+    /* PARALLAX SECTIONS */
+    .parallax-section{
+      min-height:100vh; display:flex; align-items:center;
+      padding:100px 60px; position:relative; gap:40px;
+    }
+    .parallax-section:nth-of-type(even){ flex-direction:row-reverse; }
+
+    .parallax-img{ flex:1; transform:scale(.8); transition:transform 1s ease-out, opacity 1s ease-out; opacity:0; }
+    .parallax-img.animate{ transform:scale(1); opacity:1; }
+
+    /* TEXT NEXT TO IMAGES */
+    .text-content{
+      flex:1; padding:40px; font-size:28px; color:var(--text-grey);
+      text-align:left; line-height:1.6;
+    }
+    .text-content h2{ color:var(--ink); font-weight:700; }
+
+    /* BUTTONS */
+    .buttons{
+      margin-top:30px;
+      display:flex; flex-wrap:wrap; gap:12px 16px;
+    }
+    .buttons a{
+      display:inline-block; text-align:center; text-decoration:none; font-weight:700;
+      padding:14px 24px; border-radius:14px;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    }
+    /* explicit colours (robust regardless of DOM order) */
+    .buttons a.btn-teal { background:var(--inv-teal); color:#fff; }
+    .buttons a.btn-lime { background:var(--inv-lime); color:#000; }
+    .buttons a:hover{ transform: translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.16); }
+
+    .slide-img{
+      width:521px; height:408px; object-fit:cover; border-radius:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,.1);
+    }
+
+    /* CONTACT FORM */
+    .contact{ padding:90px 24px; background:#f7f8f9; }
+    .contact .container{
+      max-width:980px; margin:0 auto; background:#fff; border-radius:16px;
+      box-shadow:0 8px 26px rgba(0,0,0,.07); padding:40px;
+    }
+    .contact h2{ margin:0 0 18px; font-size:28px; font-weight:700; color:#000; }
+    form{ display:grid; grid-template-columns:1fr 1fr; gap:18px 22px; }
+    .full{ grid-column:1 / -1; }
+    label{ display:block; font-size:14px; color:#444; margin-bottom:8px; }
+    input, select, textarea{
+      width:100%; padding:12px 14px; border:1px solid #e2e3e6; border-radius:10px;
+      font-family:'Poppins',sans-serif; font-size:16px; color:#111; background:#fff;
+      outline:none; transition:border .15s ease, box-shadow .15s ease;
+    }
+    input:focus, select:focus, textarea:focus{ border-color:var(--inv-teal); box-shadow:0 0 0 3px rgba(9,130,118,.12); }
+    textarea{ min-height:140px; resize:vertical; }
+    .checkbox{ display:flex; align-items:center; gap:10px; font-size:14px; color:#333; }
+    .checkbox input{ width:auto; }
+    .submit-wrap{ margin-top:8px; }
+    .submit-btn{
+      background:var(--inv-teal); color:#fff; border:0; padding:14px 22px; border-radius:12px;
+      font-weight:600; cursor:pointer; transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+      box-shadow:0 6px 16px rgba(9,130,118,.25);
+    }
+    .submit-btn:hover{ background:#06685e; transform:translateY(-1px); }
+
+    /* CONTACT BY STATE */
+    .contact-section{
+      background:#fff; padding:40px 30px;
+      border-top:6px solid var(--inv-lime);
+      border-bottom:4px solid var(--inv-teal);
+      max-width:900px; margin:60px auto; border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+    }
+    .contact-section h2{
+      font-size:42px; color:#4B4B4B; margin-bottom:30px;
+      border-left:8px solid var(--text-grey);
+      padding-left:12px; letter-spacing:1px;
+    }
+    .dot-selectors{ display:flex; justify-content:space-between; gap:15px; margin-bottom:25px; flex-wrap:wrap; }
+    .dot-option{
+      flex:1; text-align:center; background:#A9AAB0; color:#fff; padding:12px 18px;
+      border-radius:50px; cursor:pointer; border:2px solid transparent; transition:all .3s ease;
+      font-size:18px; min-width:120px;
+    }
+    .dot-option:hover{ background:var(--inv-lime); color:#000; }
+    .dot-option.active{ border-color:var(--inv-teal); background:var(--inv-lime); color:#000; }
+    .phone-display{
+      font-size:26px; color:#333; opacity:0; transform:translateY(10px);
+      transition:opacity .4s ease, transform .4s ease; text-align:center;
+    }
+    .phone-display.visible{ opacity:1; transform:translateY(0); }
+    .phone-display a{ color:#1c1c1c; text-decoration:none; border-bottom:2px dotted #A9AAB0; padding-bottom:4px; transition:color .3s ease; }
+    .phone-display a:hover{ color:var(--inv-lime); }
+
+    @media (max-width:900px){
+      .parallax-section{ flex-direction:column; padding:80px 24px; }
+      .parallax-section:nth-of-type(even){ flex-direction:column; }
+      .text-content{ padding:20px; font-size:22px; }
+      .slide-img{ width:100%; height:auto; }
+      form{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+ <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="row">
+      <div class="brand"><img src="Inservio-logo.svg" alt="Inservio logo" /></div>
+      <nav class="nav-links">
+  <a href="/">Home</a>
+  <a href="/pages/partners/">Partners</a>
+  <a href="/pages/clinics/">Clinics</a>
+  <a href="/pages/patients/">Patients</a>
+  <a href="/pages/pay-invoice/">Pay Invoice</a>
+  <a href="/pages/privacy-policy/">Privacy Policy</a>
+  <a href="/pages/about/">About Us</a>
+</nav>
+    </div>
+    <div class="lime-bar" aria-hidden="true"></div>
+  </header>
+
+  <!-- HERO VIDEO -->
+  <div class="hero">
+    <video autoplay muted loop playsinline>
+      <source src="istockphoto-1441876524-640_adpp_is.mp4" type="video/mp4">
+    </video>
+    <div class="hero-text">
+      Our mission is to make lives easier for patients, clinics and our partners
+    </div>
+  </div>
+
+  <!-- PARALLAX SECTION 1 - PATIENTS -->
+  <div class="parallax-section">
+    <div class="text-content">
+      <h2>Learn about how we assist patients</h2>
+      <div class="buttons">
+        <a class="btn-teal" href="#">Patient Services</a>
+        <a class="btn-lime" href="#">Pay Invoice</a>
+        <a class="btn-teal" href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="parallax-img"><img src="slide1.svg" class="slide-img" alt="Patient services illustration"></div>
+  </div>
+
+  <!-- PARALLAX SECTION 2 - PARTNERS -->
+  <div class="parallax-section">
+    <div class="text-content">
+      <h2>Inservio delivers bespoke, end-to-end solutions for the pharmaceutical industry and allied partners.</h2>
+      <div class="buttons">
+        <a class="btn-teal" href="#">Partner Services</a>
+        <a class="btn-lime" href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="parallax-img"><img src="slide2.svg" class="slide-img" alt="Partner services illustration"></div>
+  </div>
+
+  <!-- PARALLAX SECTION 3 - CLINICS -->
+  <div class="parallax-section">
+    <div class="text-content">
+      <h2>Inservio offers a comprehensive range of services to save your clinic time and money.</h2>
+      <div class="buttons">
+        <a class="btn-teal" href="#">Clinic Services Info</a>
+        <a class="btn-lime" href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="parallax-img"><img src="slide3.svg" class="slide-img" alt="Clinic services illustration"></div>
+  </div>
+
+  <!-- CONTACT FORM -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Get in touch today</h2>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+        <div>
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="First name">
+        </div>
+
+        <div>
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Last name">
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com">
+        </div>
+
+        <div>
+          <label for="enquiry">Enquiry type</label>
+          <select id="enquiry" name="enquiry">
+            <option value="" selected disabled>Select an option</option>
+            <option>Ophthalmology</option>
+            <option>Invoice</option>
+            <option>Clinic</option>
+            <option>B2B/Partner</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" placeholder="How can we help?"></textarea>
+        </div>
+
+        <div class="full checkbox">
+          <input type="checkbox" id="confirmEmail" name="confirmEmail">
+          <label for="confirmEmail">Send me a confirmation email</label>
+        </div>
+
+        <div class="full submit-wrap">
+          <button type="submit" class="submit-btn">Submit enquiry</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT BY STATE -->
+  <div class="contact-section">
+    <h2>Contact by State</h2>
+    <div class="dot-selectors">
+      <div class="dot-option" onclick="selectState('NSW', this)">NSW / ACT</div>
+      <div class="dot-option" onclick="selectState('VIC', this)">VIC / TAS</div>
+      <div class="dot-option" onclick="selectState('QLD', this)">QLD</div>
+      <div class="dot-option" onclick="selectState('SA', this)">SA</div>
+      <div class="dot-option" onclick="selectState('WA', this)">WA</div>
+    </div>
+    <div id="phoneDisplay" class="phone-display"></div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // parallax image entrance
+    const observers = document.querySelectorAll('.parallax-img');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('animate');
+      });
+    }, { threshold: 0.5 });
+    observers.forEach(img => observer.observe(img));
+
+    // contact by state
+    const phoneMap = {
+      'NSW': '(02)-9997-3941',
+      'VIC': '(03)-8689-5530',
+      'QLD': '(07)-3348-7640',
+      'SA':  '(08)-6188-8330',
+      'WA':  '(08)-6188-8340'
+    };
+    function selectState(stateCode, element) {
+      document.querySelectorAll('.dot-option').forEach(dot => dot.classList.remove('active'));
+      element.classList.add('active');
+      const phoneDisplay = document.getElementById('phoneDisplay');
+      const number = phoneMap[stateCode];
+      if (number) {
+        phoneDisplay.innerHTML = `<a href="tel:${number.replace(/[^0-9]/g, '')}">${number}</a>`;
+        phoneDisplay.classList.add('visible');
+      } else {
+        phoneDisplay.innerHTML = '';
+        phoneDisplay.classList.remove('visible');
+      }
+    }
+  </script>
+</body>
+</html>
