@@ -1,1 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inservio</title>
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Your stylesheet -->
+  <link rel="stylesheet" href="main.css" />
+
+  <!-- Navbar overrides to match previous theme -->
+  <style>
+    :root{
+      --lime:#BEF21C;
+    }
+    body{font-family:'Poppins',sans-serif;}
+    .navbar{position:sticky; top:0; z-index:1000; background:#fff;}
+    .navbar .row{display:flex; align-items:center; justify-content:space-between; padding:10px 30px;}
+    .brand img{height:34px; width:auto; display:block;}
+    .nav-links{display:flex; gap:22px;}
+    .nav-links a{font-weight:700; color:#000; text-decoration:none; transition:color .25s ease;}
+    .nav-links a:hover{color:var(--lime);}
+    .lime-bar{height:4px; background:var(--lime);}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="row">
+      <div class="brand"><img src="Inservio-logo.svg" alt="Inservio logo" /></div>
+      <nav class="nav-links">
+        <a href="https://12345rmain.netlify.app/">Home</a>
+        <a href="https://123456main.netlify.app/">Partners</a>
+        <a href="https://1234567main.netlify.app/">Clinics</a>
+        <a href="https://bpat1234.netlify.app/">Patients</a>
+        <a href="https://1238main.netlify.app/">Pay Invoice</a>
+        <a href="placeholder">Privacy Policy</a>
+        <a href="https://abus1234.netlify.app/">About Us</a>
+      </nav>
+    </div>
+    <div class="lime-bar" aria-hidden="true"></div>
+  </header>
+
+  <!-- HERO VIDEO -->
+  <section class="hero" aria-label="Hero">
+    <video autoplay muted loop playsinline>
+      <source src="webvid1.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-inner">
+      <div class="hero-text">
+        Inservio delivers <span class="highlight">bespoke</span>, end-to-end solutions for the
+        <span class="highlight">pharmaceutical industry</span> and allied partners.
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGAGING CONTENT -->
+  <section class="content content--engaging" aria-label="What we do">
+    <div class="copy">
+      <h3 class="sub-heading">Cold Chain Expertise</h3>
+      <p>
+        We specialise in the delivery, monitoring, and secure storage of
+        <strong>high-cost, cold chain medications</strong> — ensuring product integrity
+        and <strong>compliance</strong> at every step.
+      </p>
+
+      <!-- LIST 1 -->
+      <ul class="feature-list">
+        <li>
+          <!-- Thermometer (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 14.76V5a2 2 0 0 0-4 0v9.76A4 4 0 1 0 14 14.76z"/>
+          </svg>
+          <span class="feature-text">End-to-end temperature control and auditability.</span>
+        </li>
+
+        <li>
+          <!-- Check-circle (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          <span class="feature-text">Validated processes aligned to regulatory requirements.</span>
+        </li>
+      </ul>
+
+      <h3 class="sub-heading">State-of-the-Art Infrastructure</h3>
+      <p>
+        With state-of-the-art warehousing and IT infrastructure, we maintain
+        <strong>full operational control</strong>, offering complete
+        <strong>visibility</strong> and <strong>precision</strong> across the supply chain.
+      </p>
+
+      <!-- LIST 2 -->
+      <ul class="feature-list">
+        <li>
+          <!-- Target / multi-ring (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+          <span class="feature-text">Real-time tracking and transparent reporting.</span>
+        </li>
+        <li>
+          <!-- Integrated links (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 7h3a5 5 0 0 1 0 10h-3"/>
+            <path d="M9 17H6A5 5 0 0 1 6 7h3"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          <span class="feature-text">Integrated systems that reduce risk and lead time.</span>
+        </li>
+      </ul>
+
+      <h3 class="sub-heading">Patient & Partner Programs</h3>
+      <p>
+        Inservio brings extensive expertise in managing
+        <strong>early access programs</strong>, <strong>patient support services</strong>,
+        and <strong>clinical sample programs</strong> — helping bring innovative therapies to patients faster.
+      </p>
+
+      <!-- LIST 3 -->
+      <ul class="feature-list">
+        <li>
+          <!-- Seamless coordination / share graph (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          <span class="feature-text">Seamless coordination between manufacturers, clinics, and patients.</span>
+        </li>
+        <li>
+          <!-- Shield (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+          </svg>
+          <span class="feature-text">Carefully governed processes to accelerate access to therapy.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Get in touch today</h2>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p class="visually-hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+        <div>
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+        </div>
+
+        <div>
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Last name">
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+
+        <div>
+          <label for="enquiry">Enquiry type</label>
+          <select id="enquiry" name="enquiry" required>
+            <option value="" selected disabled>Select an option</option>
+            <option>Ophthalmology</option>
+            <option>Invoice</option>
+            <option>Clinic</option>
+            <option>B2B/Partner</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" placeholder="How can we help?"></textarea>
+        </div>
+
+        <div class="full checkbox">
+          <input type="checkbox" id="confirmEmail" name="confirmEmail">
+          <label for="confirmEmail">Send me a confirmation email</label>
+        </div>
+
+        <div class="full submit-wrap">
+          <button type="submit" class="submit-btn">Submit enquiry</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT BY STATE -->
+  <section class="contact-section" aria-label="Contact by State">
+    <h2>Contact by State</h2>
+    <div class="dot-selectors">
+      <button class="dot-option" data-state="NSW">NSW / ACT</button>
+      <button class="dot-option" data-state="VIC">VIC / TAS</button>
+      <button class="dot-option" data-state="QLD">QLD</button>
+      <button class="dot-option" data-state="SA">SA</button>
+      <button class="dot-option" data-state="WA">WA</button>
+    </div>
+    <div id="phoneDisplay" class="phone-display" aria-live="polite"></div>
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    // Bullet reveal
+    const featureItems = document.querySelectorAll('.feature-list li');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    featureItems.forEach(li => io.observe(li));
+
+    // Contact by State
+    const phoneMap = {
+      'NSW': '(02)-9997-3941',
+      'VIC': '(03)-8689-5530',
+      'QLD': '(07)-3348-7640',
+      'SA':  '(08)-6188-8330',
+      'WA':  '(08)-6188-8340'
+    };
+    const phoneDisplay = document.getElementById('phoneDisplay');
+    document.querySelectorAll('.dot-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.dot-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const number = phoneMap[btn.dataset.state];
+        phoneDisplay.innerHTML = number ? `<a href="tel:${number.replace(/[^0-9]/g, '')}">${number}</a>` : '';
+        phoneDisplay.classList.toggle('visible', !!number);
+      });
+    });
+  </script>
+</body>
+</html>
