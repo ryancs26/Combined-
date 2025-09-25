@@ -1,1 +1,203 @@
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #5b6472;
 
+  /* Brand colours */
+  --inv-teal: #098276;
+  --inv-lime: #BEF21C;
+  --text-grey: #a9aab0;
+
+  /* Existing aliases (kept for compatibility) */
+  --primary: #0ea5a3;
+  --primary-strong: #0a7f7d;
+  --accent: #c6fb41;  /* lime accent (unused for buttons) */
+
+  --radius: 22px;
+  --maxw: 1040px;
+  --ring: 0 22px 48px rgba(15,23,42,.10);
+
+  /* Added here for clarity */
+  --lime: #BEF21C;
+  --neutral: #aaabb1;
+}
+
+/* Ensure Poppins everywhere */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Base + Reset */
+*{ box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  color:#000;
+  font-size:20px;            /* base size = 20px */
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* NAVBAR */
+.navbar{ 
+  position:sticky; 
+  top:0; 
+  z-index:1000; 
+  background:#fff; 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center;
+  padding:20px 40px; 
+  flex-wrap:wrap; 
+  border-bottom:3px solid var(--lime);
+  gap:12px;
+}
+.navbar .row{
+  display:flex; 
+  align-items:center; 
+  justify-content:flex-start; 
+  gap:40px;
+  padding:10px 30px;
+}
+.brand img{ height:34px; width:auto; display:block; }
+.nav-links{ display:flex; gap:22px; flex-wrap:wrap; }
+.nav-links a{ 
+  font-weight:700; 
+  color:#000; 
+  text-decoration:none; 
+  font-size:1rem;
+  transition:color .25s; 
+}
+.nav-links a:hover{ color:var(--inv-teal); }
+
+/* Contact by State (card + pills) */
+.contact-section{
+  background:#fff;
+  padding:32px 24px;
+  border-top:6px solid var(--inv-lime);
+  border-bottom:4px solid var(--inv-teal);
+  max-width:900px;
+  margin:48px auto;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+.contact-section h2{
+  font-size:1.9rem;
+  color:#4B4B4B;
+  margin-bottom:22px;
+  border-left:8px solid var(--neutral);
+  padding-left:12px;
+  letter-spacing:.5px;
+  font-weight:700;
+}
+
+/* pill row */
+.dot-selectors{
+  display:flex;
+  justify-content:space-between;
+  gap:22px;
+  margin:0 0 22px;
+  flex-wrap:wrap;
+}
+
+/* pill button */
+.dot-option{
+  flex:1 1 160px;
+  text-align:center;
+  background:var(--neutral);
+  color:#fff;
+  padding:12px 22px;
+  border-radius:50px;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:background .2s, color .2s, transform .15s, box-shadow .2s, border-color .2s;
+  font-weight:600;
+}
+
+/* hover + selected */
+.dot-option:hover{
+  background:#b4b5bb;
+}
+.dot-option.active{
+  background:var(--inv-lime);
+  color:#000;
+  border-color:var(--inv-teal);
+  box-shadow:0 6px 16px rgba(9,130,118,.25);
+  transform:translateY(-1px);
+}
+
+/* phone number */
+.phone-display{
+  font-size:1.6rem;
+  color:#1c1c1c;
+  text-align:center;
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .25s, transform .25s;
+}
+.phone-display.visible{ opacity:1; transform:translateY(0); }
+.phone-display a{
+  color:#1c1c1c;
+  text-decoration:none;
+  border-bottom:2px dotted var(--neutral);
+  padding-bottom:4px;
+}
+.phone-display a:hover{ color:var(--inv-lime); }
+
+/* =========================
+   BUTTON SYSTEM
+   ========================= */
+
+/* Kill any underline on anything styled as a button */
+.btn,
+.btn:link,
+.btn:visited,
+.btn:hover,
+.btn:focus,
+.btn:active {
+  text-decoration: none !important;
+}
+
+/* Base button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid transparent;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .1s;
+}
+
+/* Accessible focus ring */
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(9,130,118,.25);
+}
+
+/* Variants */
+.btn.teal { background: var(--inv-teal); color: #fff; }
+.btn.teal:hover { background: #06685e; }
+
+.btn.lime { background: var(--lime); color: #000; }
+
+.btn.ghost { background: #fff; color: #111; border-color: #e6e7ea; }
+.btn.ghost:hover { box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+
+/* Extra insurance for the hero CTAs */
+.hero .cta-row a.btn,
+.hero .cta-row a.btn:link,
+.hero .cta-row a.btn:visited,
+.hero .cta-row a.btn:hover,
+.hero .cta-row a.btn:focus {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
