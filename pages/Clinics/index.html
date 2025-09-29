@@ -5,40 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Clinics — Inservio</title>
 
-  <!-- Fonts -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- (Optional) shared styles -->
-  <!-- <link rel="stylesheet" href="/assets/css/main.css"> -->
-
-  <!-- Page-specific CSS -->
-  <link rel="stylesheet" href="/assets/css/clinics.css">
-
-  <!-- Preload images -->
-  <link rel="preload" href="/assets/img/global/Clinicstop.svg" as="image">
-  <link rel="preload" href="/assets/img/global/Clinicsbelow.svg" as="image">
+  <link rel="preload" href="Clinicstop.svg" as="image" />
+  <link rel="preload" href="Clinicsbelow.svg" as="image" />
 
   <style>
     :root{
-      --bg:#f6f7fb; --card:#ffffff; --ink:#0f172a; --muted:#5b6472;
-      --inv-teal:#098276; --inv-lime:#BEF21C; --text-grey:#a9aab0;
-      --lime:#BEF21C; --neutral:#aaabb1;
-      --primary:#0ea5a3; --primary-strong:#0a7f7d; --accent:#c6fb41;
-      --radius:22px; --maxw:1040px; --ring:0 22px 48px rgba(15,23,42,.10);
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #5b6472;
+
+      /* Brand colours */
+      --inv-teal: #098276;
+      --inv-lime: #BEF21C;
+      --text-grey: #a9aab0;
+
+      /* Add these so button/phone styles work everywhere */
+      --lime: #BEF21C;          /* used by pills/buttons */
+      --neutral: #aaabb1;       /* used by headings/underlines */
+
+      /* Existing aliases (kept for compatibility) */
+      --primary: #0ea5a3;
+      --primary-strong:#0a7f7d;
+      --accent: #c6fb41;  /* lime accent (unused for buttons) */
+
+      --radius: 22px;
+      --maxw: 1040px;
+      --ring: 0 22px 48px rgba(15,23,42,.10);
     }
-    body{ font-family:'Poppins',sans-serif; background:var(--bg); color:var(--ink); }
+
+    /* Ensure Poppins everywhere */
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
     a{ color:inherit; text-decoration:none; }
 
-    /* NAVBAR (light baseline; keep your heavier styles in clinics.css if you want) */
-    .navbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid #eee; }
-    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 24px; max-width:var(--maxw); margin:0 auto; }
+    /* NAVBAR */
+    .navbar{ position:sticky; top:0; z-index:10; background:#fff; }
+    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; }
     .brand img{ height:34px; width:auto; display:block; }
-    .nav-links{ display:flex; gap:18px; }
-    .nav-links a{ font-weight:700; }
-    .lime-bar{ height:4px; background:var(--accent); }
+    .nav-links{ display:flex; gap:22px; }
+    .nav-links a{ font-weight:700; color:#000; text-decoration:none; }
+    .navbar .lime-bar{ height:4px; background:var(--accent); }
 
     /* HERO */
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:32px;padding:60px 24px;max-width:var(--maxw);margin:0 auto}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:32px;padding:60px 40px;border-bottom:1px solid #eee}
     .hero h1{font-size:clamp(2rem,4.6vw,3rem);line-height:1.15;margin:0 0 12px;font-weight:700}
     .hero p{margin:0 0 20px;color:#6d6e75}
     .cta-row{display:flex;gap:14px;flex-wrap:wrap}
@@ -46,15 +60,31 @@
     .btn.teal{background:var(--inv-teal);color:#fff}
     .btn.teal:hover{background:#06685e}
     .btn.lime{background:var(--lime);color:#000}
+    .btn.ghost{background:#fff;border-color:#e6e7ea;color:#111}
     .hero-media video{width:100%;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.08)}
 
-    /* CONTENT SECTIONS */
+    /* No underlines on buttons/nav */
+    .btn,
+    .btn:visited,
+    .btn:hover,
+    .btn:focus,
+    .nav-links a,
+    .nav-links a:hover,
+    .nav-links a:focus { text-decoration: none !important; }
+
+    /* ICON STRIPS */
     .section{padding:40px 24px}
-    .content--engaging{background:linear-gradient(180deg,#fff 0%,#fafafa 100%);border-radius:12px;padding:28px 24px;max-width:1100px;margin:0 auto;border:1px solid #eef0f2}
+    .content--engaging{
+      background:linear-gradient(180deg,#fff 0%,#fafafa 100%);
+      border-radius:12px;padding:28px 24px;max-width:1100px;margin:0 auto;border:1px solid #eef0f2
+    }
     .copy{max-width:900px;margin:0 auto 24px}
     .sub-heading{font-size:1.1rem;font-weight:600;color:var(--inv-teal);margin:0 0 10px}
     .content--engaging p{color:#6d6e75;margin:0}
-    .icon-strip{position:relative;overflow:hidden;border-radius:16px;border:2px solid rgba(0,0,0,.04);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.04);padding:30px}
+    .icon-strip{
+      position:relative;overflow:hidden;border-radius:16px;border:2px solid rgba(0,0,0,.04);
+      background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.04);padding:30px
+    }
     .icon-strip .art{width:100%;transition:transform .3s ease,filter .3s ease}
     .icon-strip:hover .art{transform:scale(1.01);filter:drop-shadow(0 8px 22px rgba(0,0,0,.08))}
     .labels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
@@ -62,61 +92,118 @@
     .label span{font-weight:700;color:var(--inv-teal)}
     .label:hover{transform:translateY(-3px);box-shadow:0 10px 18px rgba(0,0,0,.07)}
 
-    /* CONTACT FORM (trimmed) */
+    /* CONTACT FORM */
     .contact{ padding:72px 20px; background:#f7f8f9; }
-    .contact .container{ max-width:980px; margin:0 auto; background:#fff; border-radius:16px; box-shadow:0 8px 26px rgba(0,0,0,.07); padding:32px; }
+    .contact .container{
+      max-width:980px; margin:0 auto; background:#fff; border-radius:16px;
+      box-shadow:0 8px 26px rgba(0,0,0,.07); padding:32px;
+    }
     .contact h2{ margin:0 0 16px; font-size:1.6rem; font-weight:700; color:#000; }
     form{ display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; }
     .full{ grid-column:1/-1; }
     label{ display:block; font-size:.9rem; color:#444; margin-bottom:8px; }
-    input, select, textarea{ width:100%; padding:12px 14px; border:1px solid #e2e3e6; border-radius:10px; font-family:'Poppins',sans-serif; font-size:.95rem; color:#111; background:#fff; outline:none; transition:border .15s, box-shadow .15s; }
+    input, select, textarea{
+      width:100%; padding:12px 14px; border:1px solid #e2e3e6; border-radius:10px;
+      font-family:'Poppins',sans-serif; font-size:.95rem; color:#111; background:#fff;
+      outline:none; transition:border .15s, box-shadow .15s;
+    }
     input:focus, select:focus, textarea:focus{ border-color:var(--inv-teal); box-shadow:0 0 0 3px rgba(9,130,118,.12); }
     textarea{ min-height:150px; resize:vertical; }
-    .submit-btn{ background:var(--inv-teal); color:#fff; border:0; padding:14px 20px; border-radius:12px; font-weight:600; cursor:pointer; transition:transform .15s, background .15s, box-shadow .15s; box-shadow:0 6px 16px rgba(9,130,118,.25); }
+    .submit-btn{
+      background:var(--inv-teal); color:#fff; border:0; padding:14px 20px; border-radius:12px;
+      font-weight:600; cursor:pointer; transition:transform .15s, background .15s, box-shadow .15s;
+      box-shadow:0 6px 16px rgba(9,130,118,.25);
+    }
     .submit-btn:hover{ background:#06685e; transform:translateY(-1px); }
 
+    /* Phone error state */
+    .error-text{ font-size:.85rem; color:crimson; margin-top:6px; display:none; }
+    .invalid{ border-color:crimson !important; box-shadow:0 0 0 3px rgba(229,62,62,.15) !important; }
+
+    /* Inline checkbox row */
+    .checkbox-row{
+      display:inline-flex; /* shrink to content, no full-width bar */
+      align-items:center;
+      gap:10px;
+    }
+
+    /* PHONE NUMBERS BY STATE */
+    .phone {
+      background:#fff; padding:32px 24px;
+      border-top:6px solid var(--lime); border-bottom:4px solid var(--inv-teal);
+      max-width:900px; margin:48px auto; border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+    }
+    .phone h2{
+      font-size:1.9rem; color:#4B4B4B; margin-bottom:22px;
+      border-left:8px solid var(--neutral);
+      padding-left:12px; letter-spacing:.5px; font-weight:700;
+    }
+    .dot-selectors{ display:flex; justify-content:space-between; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+    .dot-option{
+      flex:1; min-width:110px; text-align:center; background:#A9AAB0; color:#fff;
+      padding:10px 16px; border-radius:50px; cursor:pointer; border:2px solid transparent;
+      transition:all .25s; font-size:1rem; user-select:none; font-weight:600;
+    }
+    .dot-option:hover{ background:var(--lime); color:#000; }
+    .dot-option.active{
+      border-color:var(--inv-teal);
+      background:var(--lime); color:#000;
+      box-shadow:0 6px 16px rgba(9,130,118,.25);
+      transform:translateY(-1px);
+    }
+    .phone-display{
+      font-size:1.3rem; color:#333; text-align:center;
+      opacity:0; transform:translateY(10px); transition:opacity .3s, transform .3s;
+    }
+    .phone-display.visible{ opacity:1; transform:translateY(0); }
+    .phone-display a{
+      color:#1c1c1c; text-decoration:none;
+      border-bottom:2px dotted var(--neutral); padding-bottom:4px; transition:color .25s;
+    }
+    .phone-display a:hover{ color:var(--lime); }
+
+    /* FOOTER */
+    footer{padding:40px 24px;color:#6d6e75;border-top:3px solid var(--inv-teal)}
+
     /* Responsive */
-    @media (max-width: 720px){
-      .hero{ grid-template-columns:1fr; }
+    @media (max-width: 640px){
       form{ grid-template-columns:1fr; }
-      .labels{ grid-template-columns:1fr; }
     }
   </style>
 </head>
-<body class="page-clinics">
+<body>
+  
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="row">
-      <div class="brand">
-        <img src="/assets/img/global/Inservio-logo.svg" alt="Inservio logo">
-      </div>
+      <div class="brand"><img src="Inservio-logo.svg" alt="Inservio logo" /></div>
       <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/pages/partners/">Partners</a>
-        <a href="/pages/clinics/">Clinics</a>
-        <a href="/pages/patients/">Patients</a>
-        <a href="/pages/pay-invoice/">Pay Invoice</a>
-        <a href="/pages/privacy-policy/">Privacy Policy</a>
-        <a href="/pages/about/">About Us</a>
+        <a href="https://12345rmain.netlify.app/">Home</a>
+        <a href="https://123456main.netlify.app/">Partners</a>
+        <a href="https://1234567main.netlify.app/">Clinics</a>
+        <a href="https://bpat1234.netlify.app/">Patients</a>
+        <a href="https://1238main.netlify.app/">Pay Invoice</a>
+        <a href="placeholder">Privacy Policy</a>
+        <a href="https://abus1234.netlify.app/">About Us</a>
       </nav>
     </div>
     <div class="lime-bar" aria-hidden="true"></div>
   </header>
 
-  <main>
+  <main id="home">
     <!-- HERO -->
     <section class="hero">
       <div>
         <h1>Learn about how we assist clinics</h1>
         <p>We take care of the administrative workload, enabling you to dedicate your time and attention to patient care</p>
         <div class="cta-row">
-          <a class="btn teal" href="#contact">Contact us</a>
-          <a class="btn lime" href="/pages/about/">About us</a>
+        <a class="btn teal" href="#contact">Contact us</a>
+          <a class="btn lime" href="#pay">About us</a>
         </div>
       </div>
       <div class="hero-media">
-        <!-- Change filename if your video is named differently -->
-        <video src="/assets/video/clinic1.mp4" autoplay muted loop playsinline aria-label="Clinic overview video"></video>
+        <video src="clinic1.mp4" autoplay muted loop playsinline aria-label="Clinic overview video"></video>
       </div>
     </section>
 
@@ -125,13 +212,13 @@
       <div class="content--engaging">
         <div class="copy">
           <h2 class="sub-heading">Operational advantages</h2>
-          <p>We ensure temperature controlled supply of stock without the headache.</p>
+          <p>we ensure temperature controlled supply of stock without the headache</p>
         </div>
         <div class="icon-strip">
-          <img class="art" src="/assets/img/global/Clinicstop.svg" alt="Three operational icons">
+          <img class="art" src="Clinicstop.svg" alt="Three operational icons"/>
           <div class="labels">
             <div class="label"><span>24 hour fridge monitoring and servicing</span></div>
-            <div class="label"><span>Cold-chain delivery to clinic</span></div>
+            <div class="label"><span>Cold-Chain delivery to clinic</span></div>
             <div class="label"><span>Reduced administrative cost and burden</span></div>
           </div>
         </div>
@@ -146,11 +233,11 @@
           <p>We maintain safety and reduce admin overhead across the entire journey.</p>
         </div>
         <div class="icon-strip">
-          <img class="art" src="/assets/img/global/Clinicsbelow.svg" alt="Three cold-chain icons">
+          <img class="art" src="Clinicsbelow.svg" alt="Three cold-chain icons"/>
           <div class="labels">
             <div class="label"><span>Operational efficiency refinement</span></div>
             <div class="label"><span>Instant script approvals</span></div>
-            <div class="label"><span>VitKits® for intravitreal injection</span></div>
+            <div class="label"><span>VitKits® for intraviteral injection</span></div>
           </div>
         </div>
       </div>
@@ -160,10 +247,7 @@
     <section id="contact" class="contact">
       <div class="container">
         <h2>Get in touch today</h2>
-        <form id="contact-form" name="clinics-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="clinics-contact" />
-          <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
-
+        <form id="contact-form" novalidate>
           <div>
             <label for="first">First name</label>
             <input id="first" name="first" type="text" placeholder="First name" autocomplete="given-name" required>
@@ -176,9 +260,23 @@
             <label for="email">Email</label>
             <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
           </div>
+          <div>
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel"
+                   placeholder="e.g. 0412 345 678" autocomplete="tel" aria-describedby="phoneHelp" required>
+            <div id="phoneHelp" class="error-text">Enter a valid AU number (mobile, landline, 1300/1800, or 13-XX-XX).</div>
+          </div>
           <div class="full">
             <label for="message">Your message</label>
             <textarea id="message" name="message" rows="5" placeholder="How can we help?" required></textarea>
+          </div>
+
+          <!-- Checkbox on the left, label immediately to the right -->
+          <div class="full">
+            <div class="checkbox-row">
+              <input type="checkbox" id="confirm" name="confirm">
+              <label for="confirm" style="margin:0">Send me a confirmation email</label>
+            </div>
           </div>
 
           <div class="full">
@@ -187,14 +285,135 @@
         </form>
       </div>
     </section>
+
+    <!-- PHONE NUMBERS BY STATE -->
+    <section class="phone" aria-labelledby="call-us-heading">
+      <h2 id="call-us-heading">Call Us</h2>
+      <div class="dot-selectors">
+        <button class="dot-option active" onclick="selectState('NSW', this)">NSW</button>
+        <button class="dot-option" onclick="selectState('VIC', this)">VIC</button>
+        <button class="dot-option" onclick="selectState('QLD', this)">QLD</button>
+        <button class="dot-option" onclick="selectState('SA', this)">SA</button>
+        <button class="dot-option" onclick="selectState('WA', this)">WA</button>
+      </div>
+      <div id="phoneDisplay" class="phone-display"></div>
+    </section>
   </main>
 
-  <footer style="padding:40px 24px;border-top:3px solid var(--inv-teal);color:#6d6e75;">
-    <div style="max-width:var(--maxw);margin:0 auto;">© <span id="y"></span> Inservio</div>
+  <footer>
+    <div style="max-width:1100px;margin:0 auto">
+      <small>© <span id="year"></span> Inservio. VitKits® is a registered mark. All rights reserved.</small>
+    </div>
   </footer>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Phone state numbers
+    const phoneMap = {
+      'NSW': '(02)-9997-3941',
+      'VIC': '(03)-8689-5530',
+      'QLD': '(07)-3348-7640',
+      'SA':  '(08)-6188-8330',
+      'WA':  '(08)-6188-8340'
+    };
+
+    function selectState(stateCode, element) {
+      document.querySelectorAll('.dot-option').forEach(dot => dot.classList.remove('active'));
+      element.classList.add('active');
+
+      const phoneDisplay = document.getElementById('phoneDisplay');
+      const number = phoneMap[stateCode];
+      if (number) {
+        const tel = number.replace(/[^0-9]/g, '');
+        phoneDisplay.innerHTML = `<a href="tel:${tel}">${number}</a>`;
+        phoneDisplay.classList.add('visible');
+      } else {
+        phoneDisplay.innerHTML = '';
+        phoneDisplay.classList.remove('visible');
+      }
+    }
+
+    // AU phone auto-format & validation
+    (function(){
+      const phoneInput = document.getElementById('phone');
+      const help = document.getElementById('phoneHelp');
+
+      function digitsOnly(str){ return (str || '').replace(/[^\d+]/g,'').replace(/^\+61/, '61'); }
+      function normalizeToLocal(d){
+        if(d.startsWith('61')){
+          const after = d.slice(2);
+          if(after.startsWith('4')) return '0' + after;
+          if(/^[2378]/.test(after)) return '0' + after;
+          return after;
+        }
+        return d;
+      }
+      function formatAU(d){
+        if(/^04\d{8}$/.test(d)){ return d.replace(/^(\d{4})(\d{3})(\d{3})$/, '$1 $2 $3'); }
+        if(/^(02|03|07|08)\d{8}$/.test(d)){ return d.replace(/^(\d{2})(\d{4})(\d{4})$/, '$1 $2 $3'); }
+        if(/^(1300|1800)\d{6}$/.test(d)){ return d.replace(/^(\d{4})(\d{3})(\d{3})$/, '$1 $2 $3'); }
+        if(/^13\d{4}$/.test(d)){ return d.replace(/^(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3'); }
+        if(/^04\d{0,8}$/.test(d)){ return d.replace(/^(\d{0,4})(\d{0,3})(\d{0,3}).*$/, (_,a,b,c)=>[a,b,c].filter(Boolean).join(' ')); }
+        if(/^(02|03|07|08)\d{0,8}$/.test(d)){ return d.replace(/^(\d{0,2})(\d{0,4})(\d{0,4}).*$/, (_,a,b,c)=>[a,b,c].filter(Boolean).join(' ')); }
+        if(/^(1300|1800)\d{0,6}$/.test(d)){ return d.replace(/^(\d{0,4})(\d{0,3})(\d{0,3}).*$/, (_,a,b,c)=>[a,b,c].filter(Boolean).join(' ')); }
+        if(/^13\d{0,4}$/.test(d)){ return d.replace(/^(\d{0,2})(\d{0,2})(\d{0,2}).*$/, (_,a,b,c)=>[a,b,c].filter(Boolean).join(' ')); }
+        return d;
+      }
+      function isValidAU(d){
+        return (
+          /^04\d{8}$/.test(d) ||
+          /^(02|03|07|08)\d{8}$/.test(d) ||
+          /^(1300|1800)\d{6}$/.test(d) ||
+          /^13\d{4}$/.test(d)
+        );
+      }
+      function setError(state){
+        if(state){
+          phoneInput.classList.add('invalid');
+          help.style.display = 'block';
+          phoneInput.setAttribute('aria-invalid','true');
+        }else{
+          phoneInput.classList.remove('invalid');
+          help.style.display = 'none';
+          phoneInput.removeAttribute('aria-invalid');
+        }
+      }
+      function handleFormat(){
+        const raw = digitsOnly(phoneInput.value);
+        const local = normalizeToLocal(raw);
+        const formatted = formatAU(local);
+        phoneInput.value = formatted;
+        setError(local.length >= 6 && !isValidAU(local));
+      }
+      function handleSubmit(e){
+        const raw = digitsOnly(phoneInput.value);
+        const local = normalizeToLocal(raw);
+        if(!isValidAU(local)){
+          e.preventDefault();
+          setError(true);
+          phoneInput.focus();
+        }else{
+          setError(false);
+        }
+      }
+      phoneInput.addEventListener('input', handleFormat);
+      phoneInput.addEventListener('blur', handleFormat);
+      document.getElementById('contact-form').addEventListener('submit', handleSubmit);
+    })();
+
+    // Default state select for phone section
+    window.addEventListener('DOMContentLoaded', () => {
+      const defaultBtn = document.querySelector('.dot-option.active');
+      if (defaultBtn) selectState('NSW', defaultBtn);
+    });
+
+    // Demo prevent submit – remove for production
+    document.getElementById('contact-form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      alert('Thanks! Your message has been recorded (demo).');
+    });
   </script>
 </body>
 </html>
