@@ -5,47 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Clinics — Inservio</title>
 
-  <!-- Google Font -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="/assets/css/clinics.css">
 
   <!-- Preload images -->
   <link rel="preload" href="/assets/img/global/Clinicstop.svg" as="image">
   <link rel="preload" href="/assets/img/global/Clinicsbelow.svg" as="image">
-  
+
   <style>
     :root{
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --ink: #0f172a;
-      --muted: #5b6472;
-
-      /* Brand colours */
-      --inv-teal: #098276;
-      --inv-lime: #BEF21C;
-      --text-grey: #a9aab0;
-
-      /* Add these so button/phone styles work everywhere */
-      --lime: #BEF21C;          /* used by pills/buttons */
-      --neutral: #aaabb1;       /* used by headings/underlines */
-
-      /* Existing aliases (kept for compatibility) */
-      --primary: #0ea5a3;
-      --primary-strong:#0a7f7d;
-      --accent: #c6fb41;  /* lime accent (unused for buttons) */
-
-      --radius: 22px;
-      --maxw: 1040px;
-      --ring: 0 22px 48px rgba(15,23,42,.10);
+      --bg:#f6f7fb; --card:#ffffff; --ink:#0f172a; --muted:#5b6472;
+      --inv-teal:#098276; --inv-lime:#BEF21C; --text-grey:#a9aab0;
+      --lime:#BEF21C; --neutral:#aaabb1;
+      --primary:#0ea5a3; --primary-strong:#0a7f7d; --accent:#c6fb41;
+      --radius:22px; --maxw:1040px; --ring:0 22px 48px rgba(15,23,42,.10);
     }
-
-    /* Ensure Poppins everywhere */
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-
+    body{ font-family:'Poppins',sans-serif; }
     a{ color:inherit; text-decoration:none; }
 
-    <link rel="stylesheet" href="/assets/css/clinics.css"><!-- page-specific -->
+    /* … your existing CSS rules … (kept as-is) … */
+  </style>
+</head>
+
+<!-- add a page class so clinics.css can scope rules -->
+<body class="page-clinics">
 
     /* NAVBAR */
     .navbar{ position:sticky; top:0; z-index:10; background:#fff; }
