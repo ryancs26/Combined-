@@ -8,12 +8,15 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="main.css" />
+  <!-- Global stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  <!-- Page-specific stylesheet -->
+  <link rel="stylesheet" href="/assets/css/patients.css" />
 </head>
 <body>
   
-<!-- NAVBAR -->
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="row">
       <div class="brand">
@@ -34,77 +37,67 @@
 
   <main id="home">
 
-<!-- HERO (card style) -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-card">
-    <video id="heroVideo" autoplay muted loop playsinline preload="metadata">
-      <source src="pv3.mp4?v=1" type="video/mp4" />
-    </video>
-  </div>
-</section>
+    <!-- HERO (card style) -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-card">
+        <video id="heroVideo" autoplay muted loop playsinline preload="metadata">
+          <source src="/assets/video/pv3.mp4?v=1" type="video/mp4" />
+        </video>
+      </div>
+    </section>
     
-  <!-- Patient information card -->
-  <section class="patient-info" id="patient-info" aria-labelledby="patient-info-heading">
-    <div class="patient-info__inner">
-      <div class="patient-info__icon" aria-hidden="true">
-        <!-- simple inline SVG icon -->
-        <svg viewBox="0 0 24 24" width="36" height="36" role="img" focusable="false" aria-hidden="true">
-          <path d="M12 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9zm0 2a7 7 0 100 14 7 7 0 000-14zm0 3.25a3.25 3.25 0 110 6.5 3.25 3.25 0 010-6.5zM12 15c2.485 0 4.5 1.343 4.5 3v.75H7.5V18c0-1.657 2.015-3 4.5-3z" fill="currentColor"/>
-        </svg>
+    <!-- Patient information card -->
+    <section class="patient-info" id="patient-info" aria-labelledby="patient-info-heading">
+      <div class="patient-info__inner">
+        <div class="patient-info__icon" aria-hidden="true">
+          <!-- simple inline SVG icon -->
+          <svg viewBox="0 0 24 24" width="36" height="36" role="img" focusable="false" aria-hidden="true">
+            <path d="M12 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9zm0 2a7 7 0 100 14 7 7 0 000-14zm0 3.25a3.25 3.25 0 110 6.5 3.25 3.25 0 010-6.5zM12 15c2.485 0 4.5 1.343 4.5 3v.75H7.5V18c0-1.657 2.015-3 4.5-3z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="patient-info__content">
+          <p class="patient-info__eyebrow">For ophthalmology patients</p>
+          <h2 id="patient-info-heading" class="patient-info__title">Patient Information</h2>
+
+          <p class="patient-info__lead">
+            Inservio acts as the agent for the patient arranging the medication to be dispensed by a pharmacy 
+            and delivered to your clinic in time for your appointment. Our service ensures that you do not need 
+            to collect your medication from a local pharmacy, and you do not have to worry about transporting 
+            the refrigerated medications to your appointment.
+          </p>
+
+          <ul class="patient-info__list" role="list">
+            <li>Medication arranged to be dispensed by a pharmacy.</li>
+            <li>Delivered directly to your clinic in time for your appointment.</li>
+            <li>No pickup required—no cold-chain transport worries for you.</li>
+          </ul>
+
+          <p class="patient-info__footnote">
+            Founded in 2007 when intravitreal injection treatments required specialised handling, 
+            Inservio is now the gold standard in cold-chain medication management for ophthalmology clinics.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div class="patient-info__content">
-        <p class="patient-info__eyebrow">For ophthalmology patients</p>
-        <h2 id="patient-info-heading" class="patient-info__title">Patient Information</h2>
-
-        <p class="patient-info__lead">
-          Inservio acts as the agent for the patient arranging the medication to be dispensed by a pharmacy 
-          and delivered to your clinic in time for your appointment. Our service ensures that you do not need 
-          to collect your medication from a local pharmacy, and you do not have to worry about transporting 
-          the refrigerated medications to your appointment.
-        </p>
-
-        <ul class="patient-info__list" role="list">
-          <li>Medication arranged to be dispensed by a pharmacy.</li>
-          <li>Delivered directly to your clinic in time for your appointment.</li>
-          <li>No pickup required—no cold-chain transport worries for you.</li>
-        </ul>
-
-        <p class="patient-info__footnote">
-          Founded in 2007 when intravitreal injection treatments required specialised handling, 
-          Inservio is now the gold standard in cold-chain medication management for ophthalmology clinics.
-        </p>
+    <!-- CONTACT BY STATE -->
+    <section class="contact-section" aria-label="Contact by State">
+      <h2>Contact by State</h2>
+      <div class="dot-selectors">
+        <button class="dot-option" data-state="NSW">NSW / ACT</button>
+        <button class="dot-option" data-state="VIC">VIC / TAS</button>
+        <button class="dot-option" data-state="QLD">QLD</button>
+        <button class="dot-option" data-state="SA">SA</button>
+        <button class="dot-option" data-state="WA">WA</button>
       </div>
-    </div>
-  </section>
+      <div id="phoneDisplay" class="phone-display" aria-live="polite"></div>
+    </section>
 
-  <!-- CONTACT BY STATE -->
-  <section class="contact-section" aria-label="Contact by State">
-    <h2>Contact by State</h2>
-    <div class="dot-selectors">
-      <button class="dot-option" data-state="NSW">NSW / ACT</button>
-      <button class="dot-option" data-state="VIC">VIC / TAS</button>
-      <button class="dot-option" data-state="QLD">QLD</button>
-      <button class="dot-option" data-state="SA">SA</button>
-      <button class="dot-option" data-state="WA">WA</button>
-    </div>
-    <div id="phoneDisplay" class="phone-display" aria-live="polite"></div>
-  </section>
+  </main>
 
   <!-- Scripts -->
   <script>
-    // Bullet reveal
-    const featureItems = document.querySelectorAll('.feature-list li');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.25 });
-    featureItems.forEach(li => io.observe(li));
-
     // Contact by State
     const phoneMap = {
       'NSW': '(02)-9997-3941',
@@ -127,117 +120,3 @@
 </body>
 </html>
 
-  
-<!-- NAVBAR -->
-  <header class="navbar">
-    <div class="row">
-      <div class="brand">
-        <img src="/assets/img/global/Inservio-logo.svg" alt="Inservio logo">
-      </div>
-      <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/pages/partners/">Partners</a>
-        <a href="/pages/clinics/">Clinics</a>
-        <a href="/pages/patients/">Patients</a>
-        <a href="/pages/pay-invoice/">Pay Invoice</a>
-        <a href="/pages/privacy-policy/">Privacy Policy</a>
-        <a href="/pages/about/">About Us</a>
-      </nav>
-    </div>
-    <div class="lime-bar" aria-hidden="true"></div>
-  </header>
-
-  <main id="home">
-
-<!-- HERO (card style) -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-card">
-    <video id="heroVideo" autoplay muted loop playsinline preload="metadata">
-      <source src="pv3.mp4?v=1" type="video/mp4" />
-    </video>
-  </div>
-</section>
-    
-  <!-- Patient information card -->
-  <section class="patient-info" id="patient-info" aria-labelledby="patient-info-heading">
-    <div class="patient-info__inner">
-      <div class="patient-info__icon" aria-hidden="true">
-        <!-- simple inline SVG icon -->
-        <svg viewBox="0 0 24 24" width="36" height="36" role="img" focusable="false" aria-hidden="true">
-          <path d="M12 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9zm0 2a7 7 0 100 14 7 7 0 000-14zm0 3.25a3.25 3.25 0 110 6.5 3.25 3.25 0 010-6.5zM12 15c2.485 0 4.5 1.343 4.5 3v.75H7.5V18c0-1.657 2.015-3 4.5-3z" fill="currentColor"/>
-        </svg>
-      </div>
-
-      <div class="patient-info__content">
-        <p class="patient-info__eyebrow">For ophthalmology patients</p>
-        <h2 id="patient-info-heading" class="patient-info__title">Patient Information</h2>
-
-        <p class="patient-info__lead">
-          Inservio acts as the agent for the patient arranging the medication to be dispensed by a pharmacy 
-          and delivered to your clinic in time for your appointment. Our service ensures that you do not need 
-          to collect your medication from a local pharmacy, and you do not have to worry about transporting 
-          the refrigerated medications to your appointment.
-        </p>
-
-        <ul class="patient-info__list" role="list">
-          <li>Medication arranged to be dispensed by a pharmacy.</li>
-          <li>Delivered directly to your clinic in time for your appointment.</li>
-          <li>No pickup required—no cold-chain transport worries for you.</li>
-        </ul>
-
-        <p class="patient-info__footnote">
-          Founded in 2007 when intravitreal injection treatments required specialised handling, 
-          Inservio is now the gold standard in cold-chain medication management for ophthalmology clinics.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT BY STATE -->
-  <section class="contact-section" aria-label="Contact by State">
-    <h2>Contact by State</h2>
-    <div class="dot-selectors">
-      <button class="dot-option" data-state="NSW">NSW / ACT</button>
-      <button class="dot-option" data-state="VIC">VIC / TAS</button>
-      <button class="dot-option" data-state="QLD">QLD</button>
-      <button class="dot-option" data-state="SA">SA</button>
-      <button class="dot-option" data-state="WA">WA</button>
-    </div>
-    <div id="phoneDisplay" class="phone-display" aria-live="polite"></div>
-  </section>
-
-  <!-- Scripts -->
-  <script>
-    // Bullet reveal
-    const featureItems = document.querySelectorAll('.feature-list li');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.25 });
-    featureItems.forEach(li => io.observe(li));
-
-    // Contact by State
-    const phoneMap = {
-      'NSW': '(02)-9997-3941',
-      'VIC': '(03)-8689-5530',
-      'QLD': '(07)-3348-7640',
-      'SA':  '(08)-6188-8330',
-      'WA':  '(08)-6188-8340'
-    };
-    const phoneDisplay = document.getElementById('phoneDisplay');
-    document.querySelectorAll('.dot-option').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.dot-option').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const number = phoneMap[btn.dataset.state];
-        phoneDisplay.innerHTML = number ? `<a href="tel:${number.replace(/[^0-9]/g, '')}">${number}</a>` : '';
-        phoneDisplay.classList.toggle('visible', !!number);
-      });
-    });
-  </script>
-</body>
-</html>
