@@ -8,10 +8,12 @@
   --accent: #c6fb41;     /* lime */
   --radius: 22px;
   --maxw: 1040px;
-  --ring: 0 22px 48px rgba(15,23,42,.10);
+  --ring: 0 22px 48px rgba(15, 23, 42, .10);
 }
 
 /* Base */
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
 html,body{
   margin:0;
   font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -20,112 +22,90 @@ html,body{
     radial-gradient(1200px 600px at 80% -10%, #e8fbff 0, transparent 60%),
     radial-gradient(900px 500px at -10% 0, #f1ffe6 0, transparent 55%),
     var(--bg);
-  scroll-behavior:smooth;
 }
 
-/* ================= NAVBAR (desktop inline + mobile hamburger) ================ */
+/* ================= NAVBAR (CSS-only mobile wrap; no HTML changes) ================ */
 .navbar{
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #fff;
-  width: 100%;
+  background:#fff;
+  border-bottom:none;
   box-shadow: 0 2px 10px rgba(15,23,42,.06);
 }
 .navbar .row{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding: clamp(6px, 1.2vw, 12px) clamp(12px, 4vw, 24px);
-  margin:0;
-  gap: 12px;
+  padding:10px 30px;
+  gap:12px;
 }
-.brand{ display:flex; align-items:center; }
-.brand img{ height: clamp(24px, 4vw, 34px); width:auto; display:block; }
-.navbar .lime-bar{ height:3px; background:var(--accent); }
-
-/* Desktop inline links */
-.nav-links.desktop{
-  display:flex; gap: clamp(12px, 2vw, 22px); align-items:center;
+.brand img{
+  height:34px;
+  width:auto;
+  display:block;
 }
-.nav-links.desktop a{
-  text-decoration:none; color:#000; font-weight:700; font-size:15px; padding:6px 0;
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;               /* allow wrapping on smaller widths */
+  gap:22px;
 }
-
-/* Hide desktop links on mobile */
-@media (max-width: 860px){
-  .nav-links.desktop{ display:none; }
-}
-
-/* ===== Mobile hamburger using <details> ===== */
-.navmenu{
-  position: relative;
-  display: none; /* hidden on desktop */
-  margin-left: 12px;
-}
-@media (max-width: 860px){
-  .navmenu{ display:block; }
-}
-.navmenu > summary{
-  list-style:none;
-  cursor:pointer;
-  width:42px; height:42px;
+.nav-links a{
+  text-decoration:none;
+  font-weight:700;
+  font-size:1rem;
+  color:#000;
+  transition:color .25s ease, background .2s ease;
+  padding:6px 0;
   border-radius:10px;
-  display:grid; place-items:center;
 }
-.navmenu > summary::-webkit-details-marker{ display:none; }
+.nav-links a:hover{ color:var(--accent); }
 
-/* Hamburger icon (3 bars) */
-.menu-toggle{ position:relative; }
-.menu-toggle::before{
-  content:"";
-  width:22px; height:2px; background:#0f172a; border-radius:2px;
-  box-shadow: 0 -6px 0 #0f172a, 0 6px 0 #0f172a;
+/* slim lime divider under the header */
+.navbar .lime-bar{
+  height:4px;
+  background:var(--accent);
 }
 
-/* Dropdown panel (full-width card under bar) */
-.menu-panel{
-  position: absolute;
-  left: 0; right: 0;
-  top: calc(100% + 10px);
-  background:#fff;
-  border-top: 3px solid var(--accent);
-  box-shadow: 0 22px 48px rgba(15,23,42,.10);
-  border-radius: 12px;
-  padding: 8px;
-  transform-origin: top;
-  transform: scale(.98);
-  opacity:0; visibility:hidden;
-  transition: transform .16s ease, opacity .16s ease, visibility 0s .16s;
+/* Mobile compression: links drop under logo and become comfy tap targets */
+@media (max-width: 900px){
+  .navbar .row{ padding:10px 20px; }
+  .nav-links{ gap:14px; }
 }
-.navmenu[open] .menu-panel{
-  transform: scale(1);
-  opacity:1; visibility:visible;
-  transition: transform .18s ease, opacity .18s ease;
+@media (max-width: 760px){
+  .navbar .row{
+    flex-wrap:wrap;             /* put links below brand row */
+  }
+  .nav-links{
+    width:100%;
+    margin-top:6px;
+    gap:8px 12px;
+  }
+  .nav-links a{
+    padding:10px 12px;          /* bigger tap target */
+    background:#fff;
+  }
+  .nav-links a:hover{
+    background:#f6f7fb;
+  }
 }
-
-/* Mobile links inside dropdown */
-.nav-links.mobile{
-  display:flex; flex-direction:column; gap:4px;
-}
-.nav-links.mobile a{
-  text-decoration:none; color:#0f172a;
-  font-weight:700; font-size:16px;
-  padding:14px 12px; border-radius:10px;
-}
-.nav-links.mobile a:hover{ background:#f6f7fb; }
-
-/* Focus rings for a11y */
-.menu-toggle:focus-visible,
-.menu-panel a:focus-visible{
-  outline:2px solid var(--accent);
-  outline-offset:2px;
+@media (max-width: 480px){
+  .brand img{ height:28px; }
+  .navbar .row{ padding:8px 14px; }
+  .nav-links{
+    gap:6px 10px;
+  }
+  .nav-links a{
+    font-size:.95rem;
+    padding:9px 10px;
+  }
 }
 
 /* ===== HERO (edge-to-edge image) ===== */
 .hero{
   position:relative; height:64vh; min-height:420px;
   display:grid; place-items:center; text-align:center; isolation:isolate;
+  overflow:hidden;
 }
 .hero::before{ content:""; position:absolute; inset:0; background:url('/assets/img/global/computerhelp.jpg') center/cover no-repeat; z-index:-2; }
 .hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,10,25,.12), rgba(5,10,25,.22)); z-index:-1; }
@@ -133,10 +113,10 @@ html,body{
 .hero h1{ font-size:clamp(28px,4.6vw,44px); margin:0 0 10px; font-weight:700; text-shadow:0 6px 22px rgba(0,0,0,.25); }
 .hero p{ font-size:clamp(15px,2vw,18px); margin:0 0 22px; }
 
-/* ===== WRAP ===== */
+/* WRAP */
 .wrap{ max-width:var(--maxw); margin:60px auto; padding:0 20px; }
 
-/* ===== INVOICE CARD ===== */
+/* INVOICE CARD */
 .card{ background:#fff; border-radius:var(--radius); box-shadow:var(--ring); overflow:hidden; }
 .header{ text-align:center; padding:48px clamp(20px,4vw,56px) 0; }
 .title{ font-weight:800; font-size:clamp(22px,2.6vw,28px); margin:0 0 20px; }
@@ -147,7 +127,7 @@ html,body{
 .section-divider{ height:1px; background:#eceff3; border:0; }
 .section{ padding:42px clamp(20px,4vw,56px) 48px; text-align:center; }
 
-/* ===== PAYMENTS ===== */
+/* PAYMENTS */
 .payments{ margin-top:60px; text-align:center; }
 .payments h2{ font-size:clamp(22px,2.6vw,30px); margin:0 0 16px; font-weight:800; }
 .payments .sub{ color:#616a78; margin-bottom:10px; }
@@ -190,7 +170,7 @@ html,body{
 }
 .payment-tile img{ max-width:140px; width:100%; height:auto; display:block; }
 
-/* ===== CONTACT BY STATE ===== */
+/* CONTACT BY STATE */
 .contact-section{
   background:#fff;
   border-radius:24px;
