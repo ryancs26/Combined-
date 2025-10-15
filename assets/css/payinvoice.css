@@ -23,31 +23,71 @@ html,body{
   scroll-behavior:smooth;
 }
 
-/* NAVBAR — logo left, links right */
+/* ================= NAVBAR — logo left, links right (mobile patched) ================ */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #fff;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: saturate(140%) blur(6px);
   width: 100%;
+  box-shadow: 0 2px 10px rgba(15,23,42,.06);
 }
+
 .navbar .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 30px;    /* 30px spacing from edges */
+  /* responsive padding + iOS safe areas */
+  padding: clamp(6px, 1.2vw, 12px) clamp(12px, 4vw, 24px);
+  padding-left: max(clamp(12px, 4vw, 24px), env(safe-area-inset-left));
+  padding-right: max(clamp(12px, 4vw, 24px), env(safe-area-inset-right));
   margin: 0;
   max-width: 100%;
 }
+
 .brand { display:flex; align-items:center; justify-content:flex-start; }
-.brand img { height:34px; width:auto; display:block; }
-.nav-links { display:flex; gap:22px; justify-content:flex-end; }
-.nav-links a { text-decoration:none; color:#000; font-weight:700; }
-.navbar .lime-bar { height:4px; width:100%; background:var(--accent); }
+.brand img { height: clamp(24px, 4vw, 34px); width:auto; display:block; }
+
+.nav-links {
+  display:flex;
+  gap: clamp(10px, 2.4vw, 18px);
+  justify-content:flex-end;
+  align-items:center;
+  overflow-x:auto;                /* prevent wrap growth on tiny widths */
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.nav-links::-webkit-scrollbar{ display:none; }
+
+.nav-links a {
+  text-decoration:none;
+  color:#000;
+  font-weight:600;                /* slightly lighter for compact look */
+  font-size: clamp(13px, 1.8vw, 15px);
+  padding:6px 0;
+}
+
+.navbar .lime-bar { height:3px; width:100%; background:var(--accent); }
+
+@media (max-width: 820px){
+  .navbar .row{ padding: 8px 16px; }
+  .nav-links{ gap:12px; }
+  .brand img{ height:28px; }
+}
+@media (max-width: 600px){
+  .navbar .row{ padding: 6px 12px; }
+  .nav-links{ flex-wrap: wrap; row-gap: 6px; }
+  .brand img{ height:26px; }
+}
+@media (max-width: 420px){
+  .navbar .row{ padding: 6px 10px; }
+  .nav-links a{ font-size:12.5px; }
+}
 
 /* HERO (edge-to-edge image) */
 .hero{
-  position:relative; height:64vh; min-height:420px;
+  position:relative; height:60vh; min-height:380px;
   display:grid; place-items:center; text-align:center; isolation:isolate;
 }
 .hero::before{ content:""; position:absolute; inset:0; background:url('computerhelp.svg') center/cover no-repeat; z-index:-2; }
@@ -55,10 +95,14 @@ html,body{
 .hero-inner{ max-width:var(--maxw); padding:0 22px; color:#fff; }
 .hero h1{ font-size:clamp(28px,4.6vw,44px); margin:0 0 10px; font-weight:700; text-shadow:0 6px 22px rgba(0,0,0,.25); }
 .hero p{ font-size:clamp(15px,2vw,18px); margin:0 0 22px; }
-.hero .hero-btn{ display:inline-flex; padding:14px 22px; border-radius:999px; background:#fff; color:#0b3b3a; font-weight:600; text-decoration:none; }
+.hero .hero-btn{ display:inline-flex; padding:12px 18px; border-radius:999px; background:#fff; color:#0b3b3a; font-weight:600; text-decoration:none; }
+@media (max-width: 560px){
+  .hero{ height:48vh; min-height:300px; }
+}
 
 /* Layout wrapper */
 .wrap{ max-width: var(--maxw); margin: 60px auto; padding: 0 20px; }
+.wrap{ padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
 
 /* PAY CARD */
 .card{ background:#fff; border-radius:var(--radius); box-shadow:var(--ring); overflow:hidden; }
@@ -74,6 +118,7 @@ html,body{
 /* PAYMENTS ACCEPTED */
 .payments{ margin-top:60px; }
 .container{ max-width:var(--maxw); margin:0 auto; padding:0 20px 36px; text-align:center; }
+.container{ padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
 .payments h2{ font-size:clamp(22px,2.6vw,30px); margin:0 0 16px; font-weight:800; }
 .lime-rule{ height:4px; width:92%; max-width:980px; margin:0 auto 24px; background:linear-gradient(90deg, var(--accent), transparent 80%); border-radius:4px; }
 .banner{ display:inline-block; background:linear-gradient(180deg,var(--primary),var(--primary-strong)); color:#fff; padding:16px 22px; border-radius:18px; font-weight:800; box-shadow:0 16px 34px rgba(14,165,163,.35); margin-bottom:10px; }
@@ -81,15 +126,17 @@ html,body{
 .payment-grid{ display:grid; gap:18px; grid-template-columns:repeat(5, minmax(160px,1fr)); margin-top:18px; }
 @media (max-width:1100px){ .payment-grid{ grid-template-columns:repeat(4, minmax(160px,1fr)); } }
 @media (max-width:820px){  .payment-grid{ grid-template-columns:repeat(3, minmax(160px,1fr)); } }
-@media (max-width:560px){  .payment-grid{ grid-template-columns:repeat(2, minmax(150px,1fr)); } }
+@media (max-width:560px){  .payment-grid{ grid-template-columns:repeat(2, minmax(150px,1fr)); gap:14px; } }
 .payment-card{ display:grid; place-items:center; background:#fff; border:3px solid var(--accent); border-radius:22px; padding:20px; min-height:140px; box-shadow:0 12px 28px rgba(0,0,0,.06); }
 .payment-card img{ max-width:140px; width:100%; height:auto; }
 
-/* ===== CONTACT BY STATE — CARD STYLE (matches your mock) ===== */
+/* ===== CONTACT BY STATE — CARD STYLE ===== */
 .contact-wrap{
   max-width: var(--maxw);
   margin: 60px auto;
   padding: 0 20px;
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
 }
 .contact-card{
   background:#fff;
@@ -152,90 +199,4 @@ html,body{
 }
 @media (max-width:520px){
   .state-btn{ min-width:100%; }
-}
-/* ===== NAVBAR — mobile-friendly compression ===== */
-
-/* Smooth shadow + slight translucency so it feels lighter on scroll */
-.navbar{
-  background: rgba(255,255,255,.96);
-  backdrop-filter: saturate(140%) blur(6px);
-  box-shadow: 0 2px 10px rgba(15,23,42,.06);
-}
-
-/* Scale padding responsively instead of fixed 10px 30px */
-.navbar .row{
-  padding: clamp(6px, 1.2vw, 12px) clamp(12px, 4vw, 24px);
-  /* iOS safe area */
-  padding-left: max(clamp(12px, 4vw, 24px), env(safe-area-inset-left));
-  padding-right: max(clamp(12px, 4vw, 24px), env(safe-area-inset-right));
-}
-
-/* Logo scales down on smaller screens */
-.brand img{
-  height: clamp(24px, 4vw, 34px);
-}
-
-/* Tighter link spacing + slightly lighter weight for compact look */
-.nav-links{
-  gap: clamp(10px, 2.4vw, 18px);
-  align-items: center;
-  /* allow horizontal scroll if too many items on very small widths */
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.nav-links::-webkit-scrollbar{ display:none; }
-.nav-links a{
-  font-weight: 600;
-  font-size: clamp(13px, 1.8vw, 15px);
-  padding: 6px 0; /* reduce tap target height while keeping usability */
-}
-
-/* Breakpoint refinements */
-@media (max-width: 820px){
-  .navbar .row{ padding: 8px 16px; }
-  .nav-links{ gap: 12px; }
-  .brand img{ height: 28px; }
-}
-
-@media (max-width: 600px){
-  /* allow wrapping so the bar stays short instead of super tall */
-  .nav-links{
-    flex-wrap: wrap;
-    row-gap: 6px;
-  }
-  .navbar .row{ padding: 6px 12px; }
-  .brand img{ height: 26px; }
-}
-
-/* Optional: ultra-compact mode if you really want a thin bar on tiny phones */
-@media (max-width: 420px){
-  .navbar .row{ padding: 6px 10px; }
-  .nav-links a{ font-size: 12.5px; }
-}
-
-/* Keep the lime bar crisp on mobile */
-.navbar .lime-bar{ height: 3px; }
-
-/* ===== Minor hero tweaks so above-the-fold stays balanced on small screens ===== */
-.hero{
-  height: 60vh;
-  min-height: 380px;
-}
-@media (max-width: 560px){
-  .hero{ height: 48vh; min-height: 300px; }
-  .hero .hero-btn{ padding: 12px 18px; }
-}
-
-/* ===== General container breathing room on small screens ===== */
-.wrap,
-.container,
-.contact-wrap{
-  padding-left: max(16px, env(safe-area-inset-left));
-  padding-right: max(16px, env(safe-area-inset-right));
-}
-
-/* Payments grid already responsive; nudge gaps on small screens */
-@media (max-width: 560px){
-  .payment-grid{ gap: 14px; }
 }
