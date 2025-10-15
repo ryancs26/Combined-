@@ -153,3 +153,89 @@ html,body{
 @media (max-width:520px){
   .state-btn{ min-width:100%; }
 }
+/* ===== NAVBAR — mobile-friendly compression ===== */
+
+/* Smooth shadow + slight translucency so it feels lighter on scroll */
+.navbar{
+  background: rgba(255,255,255,.96);
+  backdrop-filter: saturate(140%) blur(6px);
+  box-shadow: 0 2px 10px rgba(15,23,42,.06);
+}
+
+/* Scale padding responsively instead of fixed 10px 30px */
+.navbar .row{
+  padding: clamp(6px, 1.2vw, 12px) clamp(12px, 4vw, 24px);
+  /* iOS safe area */
+  padding-left: max(clamp(12px, 4vw, 24px), env(safe-area-inset-left));
+  padding-right: max(clamp(12px, 4vw, 24px), env(safe-area-inset-right));
+}
+
+/* Logo scales down on smaller screens */
+.brand img{
+  height: clamp(24px, 4vw, 34px);
+}
+
+/* Tighter link spacing + slightly lighter weight for compact look */
+.nav-links{
+  gap: clamp(10px, 2.4vw, 18px);
+  align-items: center;
+  /* allow horizontal scroll if too many items on very small widths */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.nav-links::-webkit-scrollbar{ display:none; }
+.nav-links a{
+  font-weight: 600;
+  font-size: clamp(13px, 1.8vw, 15px);
+  padding: 6px 0; /* reduce tap target height while keeping usability */
+}
+
+/* Breakpoint refinements */
+@media (max-width: 820px){
+  .navbar .row{ padding: 8px 16px; }
+  .nav-links{ gap: 12px; }
+  .brand img{ height: 28px; }
+}
+
+@media (max-width: 600px){
+  /* allow wrapping so the bar stays short instead of super tall */
+  .nav-links{
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .navbar .row{ padding: 6px 12px; }
+  .brand img{ height: 26px; }
+}
+
+/* Optional: ultra-compact mode if you really want a thin bar on tiny phones */
+@media (max-width: 420px){
+  .navbar .row{ padding: 6px 10px; }
+  .nav-links a{ font-size: 12.5px; }
+}
+
+/* Keep the lime bar crisp on mobile */
+.navbar .lime-bar{ height: 3px; }
+
+/* ===== Minor hero tweaks so above-the-fold stays balanced on small screens ===== */
+.hero{
+  height: 60vh;
+  min-height: 380px;
+}
+@media (max-width: 560px){
+  .hero{ height: 48vh; min-height: 300px; }
+  .hero .hero-btn{ padding: 12px 18px; }
+}
+
+/* ===== General container breathing room on small screens ===== */
+.wrap,
+.container,
+.contact-wrap{
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+/* Payments grid already responsive; nudge gaps on small screens */
+@media (max-width: 560px){
+  .payment-grid{ gap: 14px; }
+}
