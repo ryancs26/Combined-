@@ -40,38 +40,61 @@
       scroll-behavior:smooth;
     }
 
- /* =========================
-       NAVBAR
-       ========================= */
-    .navbar{
-      position: sticky; top: 0; z-index: 1000; background:#fff;
-    }
-    .navbar .row{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:10px 30px;
-    }
-    .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
-    .brand img{ height:34px; width:auto; display:block; }
-    .nav-links{ display:flex; flex-wrap:wrap; gap:22px; }
-    .nav-links a{
-      text-decoration:none; font-weight:700; font-size:1rem; color:#000; transition:color .25s ease;
-    }
-    .nav-links a:hover{ color: var(--lime); }
-    .nav-links a[aria-current="page"]{
-      color: var(--inv-teal);
-      border-bottom: 2px solid var(--lime);
-      padding-bottom: 2px;
-    }
-    .lime-bar{ height:4px; background: var(--lime); }
+/* =========================
+   NAVBAR (robust mobile wrap; NO HTML changes)
+   ========================= */
+.header, .navbar{ /* guard in case of other .header rules elsewhere */
+  position: sticky; top: 0; z-index: 1000; background:#fff;
+}
 
-    /* Mobile-friendly scroll for nav */
-    @media (max-width: 900px){
-      .navbar .row{ padding:10px 16px; }
-      .nav-links{
-        gap:12px; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;
-      }
-      .nav-links::-webkit-scrollbar{ display:none; }
-    }
+.navbar .row{
+  display:flex !important;                 /* ensure flex context */
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 30px;
+  max-width:100%;
+}
+
+/* brand */
+.navbar .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+.navbar .brand img{ height:34px; width:auto; display:block; }
+
+/* links (desktop default) */
+.navbar .nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+  align-items:center;
+  justify-content:flex-end;
+  margin:0; padding:0;
+}
+.navbar .nav-links a{
+  text-decoration:none;
+  font-weight:700;
+  font-size:1rem;
+  color:#000;
+  transition:color .25s ease, background .2s ease;
+  padding:6px 0;
+  border-radius:10px;
+}
+.navbar .nav-links a:hover{ color: var(--lime); }
+
+/* lime divider */
+.navbar .lime-bar{ height:4px; background: var(--lime); }
+
+/* --------- responsive behavior --------- */
+@media (max-width: 900px){
+  .navbar .row{ padding:10px 16px; }
+  .navbar .nav-links{ gap:14px; }
+}
+
+/* CRITICAL WRAP: force links under logo and make each a comfy tap target */
+@media (max-width: 760px){
+  .navbar .row{
+    flex-wrap: wrap !important;            /* allow a second row */
+  }
+
 
     /* HERO */
     .hero{ position:relative; width:100%; height:100vh; overflow:hidden; }
