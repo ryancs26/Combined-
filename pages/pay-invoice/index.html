@@ -1,35 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inservio Health — Pay Invoice</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Navbar + Hero overrides -->
   <style>
     :root{
       --lime:#BEF21C;
-    }
-    body{font-family:'Poppins',sans-serif;}
-    .navbar{position:sticky; top:0; z-index:1000; background:#fff;}
-    .navbar .row{display:flex; align-items:center; justify-content:space-between; padding:10px 30px;}
-    .brand img{height:34px; width:auto; display:block;}
-    .nav-links{display:flex; gap:22px;}
-    .nav-links a{font-weight:700; color:#000; text-decoration:none; transition:color .25s ease;}
-    .nav-links a:hover{color:var(--lime);}
-    .lime-bar{height:4px; background:var(--lime); width:100%; display:block;}
 
-  <style>
-    :root{
       --bg: #f6f7fb;
       --card: #ffffff;
       --ink: #0f172a;
       --muted: #5b6472;
       --primary: #0ea5a3;
       --primary-strong:#0a7f7d;
-      --accent: #c6fb41;     /* lime */
+      --accent: #c6fb41;
       --radius: 22px;
       --maxw: 1040px;
       --ring: 0 22px 48px rgba(15,23,42,.10);
@@ -46,30 +31,15 @@
       scroll-behavior:smooth;
     }
 
- /* =========================
-       NAVBAR
-       ========================= */
-    .navbar{
-      position: sticky; top: 0; z-index: 1000; background:#fff;
-    }
-    .navbar .row{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:10px 30px;
-    }
-    .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+    /* NAVBAR */
+    .navbar{ position:sticky; top:0; z-index:1000; background:#fff; }
+    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; gap:22px; }
     .brand img{ height:34px; width:auto; display:block; }
-    .nav-links{ display:flex; flex-wrap:wrap; gap:22px; }
-    .nav-links a{
-      text-decoration:none; font-weight:700; font-size:1rem; color:#000; transition:color .25s ease;
-    }
-    .nav-links a:hover{ color: var(--lime); }
-    .nav-links a[aria-current="page"]{
-      color: var(--inv-teal);
-      border-bottom: 2px solid var(--lime);
-      padding-bottom: 2px;
-    }
-    .lime-bar{ height:4px; background: var(--lime); }
-    
+    .nav-links{ display:flex; gap:22px; flex-wrap:wrap; }
+    .nav-links a{ font-weight:700; color:#000; text-decoration:none; transition:color .25s ease; }
+    .nav-links a:hover{ color:var(--lime); }
+    .lime-bar{ height:4px; background:var(--lime); width:100%; display:block; }
+
     /* HERO */
     .hero{
       position:relative; height:64vh; min-height:420px;
@@ -84,13 +54,28 @@
     /* WRAP */
     .wrap{ max-width:var(--maxw); margin:60px auto; padding:0 20px; }
 
-    /* INVOICE CARD */
+    /* CARD + BUTTONS */
     .card{ background:#fff; border-radius:var(--radius); box-shadow:var(--ring); overflow:hidden; }
     .header{ text-align:center; padding:48px clamp(20px,4vw,56px) 0; }
     .title{ font-weight:800; font-size:clamp(22px,2.6vw,28px); margin:0 0 20px; }
-    .btn{ display:inline-flex; align-items:center; gap:.6rem; padding:14px 24px; border-radius:999px; border:0; font-weight:700; text-decoration:none; cursor:pointer; }
-    .btn-primary{ background:linear-gradient(180deg,var(--primary),var(--primary-strong)); color:#fff; box-shadow:0 14px 28px rgba(14,165,163,.28); }
-    .btn-accent{ background:var(--accent); color:#0f2a1f; box-shadow:0 18px 36px rgba(198,251,65,.40); }
+
+    .btn{
+      display:inline-flex; align-items:center; gap:.6rem;
+      padding:14px 24px; border-radius:999px; border:0;
+      font-weight:700; text-decoration:none; cursor:pointer;
+      line-height:1; /* keeps pill compact */
+    }
+    .btn-primary{
+      background:linear-gradient(180deg,var(--primary),var(--primary-strong));
+      color:#fff;
+      box-shadow:0 14px 28px rgba(14,165,163,.28);
+    }
+    .btn-accent{
+      background:var(--accent);
+      color:#0f2a1f;
+      box-shadow:0 18px 36px rgba(198,251,65,.40);
+    }
+
     .lead,.copy{ color:var(--muted); line-height:2; max-width:78ch; margin:18px auto; }
     .section-divider{ height:1px; background:#eceff3; border:0; }
     .section{ padding:42px clamp(20px,4vw,56px) 48px; text-align:center; }
@@ -106,28 +91,16 @@
     @media (max-width:560px){  .payment-grid{ grid-template-columns:repeat(2, minmax(150px,1fr)); } }
 
     .payment-radio{ position:absolute; opacity:0; pointer-events:none; }
-
     .payment-tile{
-      position:relative;
-      display:grid; place-items:center;
-      background:#fff;
-      border:3px solid var(--accent);
-      border-radius:22px;
-      padding:20px;
-      min-height:140px;
-      box-shadow:0 12px 28px rgba(0,0,0,.06);
-      cursor:pointer;
+      position:relative; display:grid; place-items:center; background:#fff;
+      border:3px solid var(--accent); border-radius:22px; padding:20px; min-height:140px;
+      box-shadow:0 12px 28px rgba(0,0,0,.06); cursor:pointer;
       transition:transform .16s ease, box-shadow .28s ease, border-color .22s ease, filter .22s ease;
       user-select:none;
     }
-    .payment-tile:hover{
-      transform:translateY(-6px);
-      box-shadow:0 20px 50px rgba(14,165,163,.20);
-      filter:saturate(1.03);
-    }
+    .payment-tile:hover{ transform:translateY(-6px); box-shadow:0 20px 50px rgba(14,165,163,.20); filter:saturate(1.03); }
     .payment-radio:focus-visible + .payment-tile{
-      outline:0;
-      transform:translateY(-6px);
+      outline:0; transform:translateY(-6px);
       box-shadow:0 0 0 3px #fff, 0 0 0 6px rgba(198,251,65,.85), 0 16px 42px rgba(14,165,163,.18);
       border-color: var(--accent);
     }
