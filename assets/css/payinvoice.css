@@ -1,4 +1,4 @@
-/* =========================
+/* ========================= 
    Tokens & Base
    ========================= */
 :root{
@@ -26,61 +26,76 @@ body{
 }
 
 /* =========================
-   NAVBAR (works with your current HTML)
+   NAVBAR (robust mobile wrap; NO HTML changes)
    ========================= */
-.navbar{
+.header, .navbar{ /* guard in case of other .header rules elsewhere */
   position: sticky; top: 0; z-index: 1000; background:#fff;
 }
+
 .navbar .row{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:12px; padding:10px 30px;
+  display:flex !important;                 /* ensure flex context */
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 30px;
+  max-width:100%;
 }
 
 /* brand */
-.brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
-.brand img{ height:34px; width:auto; display:block; }
+.navbar .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+.navbar .brand img{ height:34px; width:auto; display:block; }
 
 /* links (desktop default) */
-.nav-links{
-  display:flex; flex-wrap:wrap; gap:22px;
+.navbar .nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+  align-items:center;
+  justify-content:flex-end;
+  margin:0; padding:0;
 }
-.nav-links a{
-  text-decoration:none; font-weight:700; font-size:1rem; color:#000; transition:color .25s ease;
-  padding:6px 0; border-radius:10px;
+.navbar .nav-links a{
+  text-decoration:none;
+  font-weight:700;
+  font-size:1rem;
+  color:#000;
+  transition:color .25s ease, background .2s ease;
+  padding:6px 0;
+  border-radius:10px;
 }
-.nav-links a:hover{ color: var(--lime); }
+.navbar .nav-links a:hover{ color: var(--lime); }
 
 /* lime divider */
-.lime-bar{ height:4px; background: var(--lime); }
+.navbar .lime-bar{ height:4px; background: var(--lime); }
 
-/* --------- responsive behavior (NO HTML CHANGES) --------- */
+/* --------- responsive behavior --------- */
 @media (max-width: 900px){
   .navbar .row{ padding:10px 16px; }
-  .nav-links{ gap:14px; }
+  .navbar .nav-links{ gap:14px; }
 }
 
-/* critical wrap rules */
+/* CRITICAL WRAP: force links under logo and make each a comfy tap target */
 @media (max-width: 760px){
-  /* let items break onto new line */
   .navbar .row{
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;            /* allow a second row */
   }
 
-  /* put links UNDER brand, stretch full width */
+  /* Logo tweaks */
+  .navbar .brand img{ height:30px; }
+
+  /* Put links UNDER brand, full width, stacked (1 per row) */
   .navbar .row > .nav-links{
-    order: 1;                 /* after brand */
-    flex: 1 0 100%;           /* occupy full row */
-    width: 100%;
+    order: 2;                               /* after brand */
+    flex: 1 0 100% !important;              /* take entire new row */
+    width: 100% !important;
     margin-top: 6px;
 
-    /* stacked list: one link per row, no overflow */
-    display: grid;
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr;             /* one link per row */
     gap: 8px;
   }
 
-  /* bigger, touch-friendly targets */
-  .nav-links a{
+  .navbar .nav-links a{
     display:block;
     width:100%;
     text-align:left;
@@ -88,18 +103,15 @@ body{
     background:#fff;
     font-size:1rem;
   }
-  .nav-links a:hover{ background:#f6f7fb; }
-
-  /* scale logo a touch */
-  .brand img{ height:30px; }
+  .navbar .nav-links a:hover{ background:#f6f7fb; }
 }
 
 /* ultra small tweaks */
 @media (max-width: 480px){
   .navbar .row{ padding:8px 14px; }
-  .brand img{ height:28px; }
+  .navbar .brand img{ height:28px; }
   .navbar .row > .nav-links{ gap:6px; }
-  .nav-links a{ font-size:.95rem; padding:10px 10px; }
+  .navbar .nav-links a{ font-size:.95rem; padding:10px 10px; }
 }
 
 /* =========================
