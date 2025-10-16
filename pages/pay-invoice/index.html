@@ -32,14 +32,30 @@
       scroll-behavior:smooth;
     }
 
-    /* NAVBAR */
-    .navbar{ position:sticky; top:0; z-index:10; background:#fff; }
-    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; }
+ /* =========================
+       NAVBAR
+       ========================= */
+    .navbar{
+      position: sticky; top: 0; z-index: 1000; background:#fff;
+    }
+    .navbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 30px;
+    }
+    .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
     .brand img{ height:34px; width:auto; display:block; }
-    .nav-links{ display:flex; gap:22px; }
-    .nav-links a{ font-weight:700; color:#000; text-decoration:none; }
-    .navbar .lime-bar{ height:4px; background:var(--accent); }
-
+    .nav-links{ display:flex; flex-wrap:wrap; gap:22px; }
+    .nav-links a{
+      text-decoration:none; font-weight:700; font-size:1rem; color:#000; transition:color .25s ease;
+    }
+    .nav-links a:hover{ color: var(--lime); }
+    .nav-links a[aria-current="page"]{
+      color: var(--inv-teal);
+      border-bottom: 2px solid var(--lime);
+      padding-bottom: 2px;
+    }
+    .lime-bar{ height:4px; background: var(--lime); }
+    
     /* HERO */
     .hero{
       position:relative; height:64vh; min-height:420px;
