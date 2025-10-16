@@ -7,6 +7,20 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
+  <!-- Navbar + Hero overrides -->
+  <style>
+    :root{
+      --lime:#BEF21C;
+    }
+    body{font-family:'Poppins',sans-serif;}
+    .navbar{position:sticky; top:0; z-index:1000; background:#fff;}
+    .navbar .row{display:flex; align-items:center; justify-content:space-between; padding:10px 30px;}
+    .brand img{height:34px; width:auto; display:block;}
+    .nav-links{display:flex; gap:22px;}
+    .nav-links a{font-weight:700; color:#000; text-decoration:none; transition:color .25s ease;}
+    .nav-links a:hover{color:var(--lime);}
+    .lime-bar{height:4px; background:var(--lime); width:100%; display:block;}
+
   <style>
     :root{
       --bg: #f6f7fb;
