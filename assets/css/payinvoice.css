@@ -69,3 +69,165 @@
   .brand img{ height:28px; }
   .nav-links a{ font-size:.95rem; padding:10px 10px; }
 }
+/* =========================
+   RESPONSIVE (Mobile-first)
+   ========================= */
+@media (max-width: 900px){
+  .navbar{ padding:16px 24px; }
+  .nav-links{ gap:12px; }
+  .hero{ height:64vh; }
+  .content--engaging{ padding:36px 20px; margin:24px auto; }
+  .copy{ max-width: 92%; }
+  form{ grid-template-columns:1fr; }
+}
+
+@media (max-width: 640px){
+  body{ font-size:18px; }                /* scale base down slightly on small screens */
+  .nav-links{ width:100%; justify-content:flex-start; }
+  .nav-links a{ font-size:.95rem; }      /* ~17px */
+  .hero{ height:56vh; min-height:360px; }
+  .hero-text{ font-size:clamp(1.05rem,5vw,1.35rem); max-width:64ch; }
+  .content--engaging{ padding:28px 18px; }
+  .sub-heading{ font-size:1rem; }
+  .content--engaging p{ font-size:.95rem; }
+  .feature-list li{ grid-template-columns:14px 1fr; column-gap:10px; margin-bottom:12px; }
+  .feature-list .feature-icon{ width:14px; height:14px; }
+  .dot-selectors{ gap:10px; }
+  .dot-option{ padding:10px 14px; font-size:.9rem; }
+  .contact-section{ margin:36px auto; }
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion:reduce){
+  .hero-text{ animation:none; opacity:1; transform:none; }
+  .feature-list li{ transition:none; opacity:1; transform:none; }
+  .feature-list li.reveal svg{ animation:none; }
+}
+/* Payment tiles: micro-interactions */
+.payment-card{
+  position: relative;
+  cursor: pointer;
+  transition:
+    transform .16s ease,
+    box-shadow .28s ease,
+    border-color .22s ease,
+    background .22s ease,
+    filter .22s ease;
+  /* keeps the content centered while animating */
+  will-change: transform, box-shadow, border-color, background, filter;
+}
+
+/* subtle hover lift + glow */
+.payment-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(14, 165, 163, .20);
+  border-color: var(--accent);
+  filter: saturate(1.03);
+}
+
+/* keyboard focus (accessible) */
+.payment-card:focus-visible{
+  outline: 0;
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px rgba(198, 251, 65, .85),
+    0 16px 42px rgba(14,165,163,.18);
+  border-color: var(--accent);
+}
+
+/* pressed state */
+.payment-card:active{
+  transform: translateY(-2px);
+}
+
+/* optional "selected" style (toggled via JS) */
+.payment-card.selected{
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(198,251,65,.12), transparent 60%),
+    #fff;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 2px rgba(198,251,65,.65) inset,
+    0 18px 42px rgba(14,165,163,.20);
+}
+
+/* check badge that appears when selected */
+.payment-card .badge{
+  position:absolute;
+  top:10px; right:10px;
+  height:26px; width:26px;
+  border-radius:999px;
+  background: var(--accent);
+  box-shadow: 0 6px 14px rgba(198,251,65,.45);
+  display:grid; place-items:center;
+  color:#0a2b20;
+  font-weight:800;
+  font-size:16px;
+  line-height:1;
+  transform: scale(.8);
+  opacity: 0;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.payment-card.selected .badge{ transform: scale(1); opacity:1; }
+
+/* optional label under logos (if you add a <span class="payment-label">…) */
+.payment-label{
+  display:block;
+  margin-top:10px;
+  font-weight:700;
+  color:#495061;
+  font-size:.95rem;
+}
+
+/* NAVBAR (aligned with previous theme) */
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background:#fff;
+  border-bottom: none;   /* the slim lime bar sits below instead */
+  padding: 0;            /* row handles the inner spacing */
+}
+
+.navbar .row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 30px;
+  gap:12px;
+}
+
+.brand img{
+  height:34px;
+  width:auto;
+  display:block;
+}
+
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+}
+
+.nav-links a{
+  text-decoration:none;      /* remove underlines */
+  font-weight:700;
+  font-size:1rem;
+  color:#000;
+  transition:color .25s ease;
+}
+
+.nav-links a:hover{
+  color:var(--lime);
+}
+
+/* slim lime divider under the header */
+.lime-bar{
+  height:4px;
+  background:var(--accent);
+}
+@media (max-width: 900px){
+  .navbar .row{ padding:10px 20px; }
+  .nav-links{ gap:14px; }
+}
