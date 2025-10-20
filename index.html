@@ -226,57 +226,95 @@
     <div class="parallax-img"><img src="/assets/img/global/slide3.svg" class="slide-img" alt="Clinic services illustration"></div>
   </div>
 
-  <!-- CONTACT FORM -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <h2>Get in touch today</h2>
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact">
-        <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+ <!-- CONTACT FORM -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2>Get in touch today</h2>
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/thank-you"
+    >
+      <input type="hidden" name="form-name" value="contact">
+      <p class="visually-hidden">
+        <label>Don’t fill this out: <input name="bot-field" /></label>
+      </p>
 
-        <div>
-          <label for="firstName">First name</label>
-          <input type="text" id="firstName" name="firstName" placeholder="First name">
-        </div>
+      <div>
+        <label for="firstName">First name</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="First name"
+          required
+          autocomplete="given-name"
+        >
+      </div>
 
-        <div>
-          <label for="lastName">Last name</label>
-          <input type="text" id="lastName" name="lastName" placeholder="Last name">
-        </div>
+      <div>
+        <label for="lastName">Last name</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Last name"
+          autocomplete="family-name"
+        >
+      </div>
 
-        <div>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com">
-        </div>
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+          autocomplete="email"
+        >
+      </div>
 
-        <div>
-          <label for="enquiry">Enquiry type</label>
-          <select id="enquiry" name="enquiry">
-            <option value="" selected disabled>Select an option</option>
-            <option>Ophthalmology</option>
-            <option>Invoice</option>
-            <option>Clinic</option>
-            <option>B2B/Partner</option>
-            <option>Other</option>
-          </select>
-        </div>
+      <div>
+        <label for="enquiry">Enquiry type</label>
+        <select id="enquiry" name="enquiry" required>
+          <option value="" selected disabled>Select an option</option>
+          <option>Ophthalmology</option>
+          <option>Invoice</option>
+          <option>Clinic</option>
+          <option>B2B/Partner</option>
+          <option>Other</option>
+        </select>
+      </div>
 
-        <div class="full">
-          <label for="message">Your message</label>
-          <textarea id="message" name="message" placeholder="How can we help?"></textarea>
-        </div>
+      <div class="full">
+        <label for="message">Your message</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="How can we help?"
+          autocomplete="off"
+        ></textarea>
+      </div>
 
-        <div class="full checkbox">
-          <input type="checkbox" id="confirmEmail" name="confirmEmail">
-          <label for="confirmEmail">Send me a confirmation email</label>
-        </div>
+      <div class="full checkbox">
+        <input type="checkbox" id="confirmEmail" name="confirmEmail">
+        <label for="confirmEmail">Send me a confirmation email</label>
+      </div>
 
-        <div class="full submit-wrap">
-          <button type="submit" class="submit-btn">Submit enquiry</button>
-        </div>
-      </form>
-    </div>
-  </section>
+      <!-- Netlify reCAPTCHA (enable in Netlify → Forms → your form) -->
+      <div class="full">
+        <div data-netlify-recaptcha="true"></div>
+      </div>
+
+      <div class="full submit-wrap">
+        <button type="submit" class="submit-btn">Submit enquiry</button>
+      </div>
+    </form>
+  </div>
+</section>
 
   <!-- CONTACT BY STATE -->
   <div class="contact-section">
