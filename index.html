@@ -40,44 +40,13 @@
       scroll-behavior:smooth;
     }
 
-  /* =========================
-       NAVBAR
-       ========================= */
-    .navbar{
-      position: sticky; top: 0; z-index: 1000; background:#fff;
-    }
-    .navbar .row{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:10px 30px;
-    }
-    .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+      /* NAVBAR */
+    .navbar{ position:sticky; top:0; z-index:10; background:#fff; }
+    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; }
     .brand img{ height:34px; width:auto; display:block; }
-    .nav-links{ display:flex; flex-wrap:wrap; gap:22px; }
-    .nav-links a{
-      text-decoration:none; font-weight:700; font-size:1rem; color:#000; transition:color .25s ease;
-    }
-    .nav-links a:hover{ color: var(--lime); }
-    .nav-links a[aria-current="page"]{
-      color: var(--inv-teal);
-      border-bottom: 2px solid var(--lime);
-      padding-bottom: 2px;
-    }
-    .lime-bar{ height:4px; background: var(--lime); }
-
-    @media (max-width: 900px){
-      .navbar .row{ padding:10px 16px; }
-      .nav-links{
-        gap:12px; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;
-      }
-      .nav-links::-webkit-scrollbar{ display:none; }
-    }
-
-/* CRITICAL WRAP: force links under logo and make each a comfy tap target */
-@media (max-width: 760px){
-  .navbar .row{
-    flex-wrap: wrap !important;            /* allow a second row */
-  }
-
+    .nav-links{ display:flex; gap:22px; }
+    .nav-links a{ font-weight:700; color:#000; text-decoration:none; }
+    .navbar .lime-bar{ height:4px; background:var(--accent); }
 
     /* HERO */
     .hero{ position:relative; width:100%; height:100vh; overflow:hidden; }
@@ -90,8 +59,8 @@
 
     /* PARALLAX SECTIONS */
     .parallax-section{
-      min-height:55vh; display:flex; align-items:center;
-      padding:60px 60px; position:relative; gap:40px;
+      min-height:100vh; display:flex; align-items:center;
+      padding:100px 60px; position:relative; gap:40px;
     }
     .parallax-section:nth-of-type(even){ flex-direction:row-reverse; }
 
@@ -196,17 +165,15 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="row">
-      <div class="brand">
-<img src="/assets/img/global/Inservio-logo.svg" alt="Inservio logo">
-      </div>
+      <div class="brand"><img src="Inservio-logo.svg" alt="Inservio logo" /></div>
       <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/pages/partners/">Partners</a>
-        <a href="/pages/clinics/">Clinics</a>
-        <a href="/pages/patients/">Patients</a>
-        <a href="/pages/pay-invoice/">Pay Invoice</a>
-        <a href="/pages/privacy-policy/">Privacy Policy</a>
-        <a href="/pages/about-us/">About Us</a>
+        <a href="https://12345rmain.netlify.app/">Home</a>
+        <a href="https://123456main.netlify.app/">Partners</a>
+        <a href="https://1234567main.netlify.app/">Clinics</a>
+        <a href="https://bpat1234.netlify.app/">Patients</a>
+        <a href="https://1238main.netlify.app/">Pay Invoice</a>
+        <a href="placeholder">Privacy Policy</a>
+        <a href="https://abus1234.netlify.app/">About Us</a>
       </nav>
     </div>
     <div class="lime-bar" aria-hidden="true"></div>
@@ -214,9 +181,9 @@
 
   <!-- HERO VIDEO -->
   <div class="hero">
-<video autoplay muted loop playsinline>
-  <source src="/assets/video/istockphoto-1441876524-640_adpp_is.mp4" type="video/mp4">
-</video>
+    <video autoplay muted loop playsinline>
+      <source src="istockphoto-1441876524-640_adpp_is.mp4" type="video/mp4">
+    </video>
     <div class="hero-text">
       Our mission is to make lives easier for patients, clinics and our partners
     </div>
@@ -227,12 +194,12 @@
     <div class="text-content">
       <h2>Learn about how we assist patients</h2>
       <div class="buttons">
-        <a class="btn-teal" href="/pages/patients/">Patient Services</a>
-        <a class="btn-lime" href="/pages/pay-invoice/">Pay Invoice</a>
-        <a class="btn-teal" href="#contact">Contact Us</a>
+        <a class="btn-teal" href="#">Patient Services</a>
+        <a class="btn-lime" href="#">Pay Invoice</a>
+        <a class="btn-teal" href="#">Contact Us</a>
       </div>
     </div>
-    <div class="parallax-img"><img src="/assets/img/global/slide1.svg" class="slide-img" alt="Patient services illustration"></div>
+    <div class="parallax-img"><img src="slide1.svg" class="slide-img" alt="Patient services illustration"></div>
   </div>
 
   <!-- PARALLAX SECTION 2 - PARTNERS -->
@@ -240,23 +207,23 @@
     <div class="text-content">
       <h2>Inservio delivers bespoke, end-to-end solutions for the pharmaceutical industry and allied partners.</h2>
       <div class="buttons">
-        <a class="btn-teal" href="/pages/partners/">Partner Services</a>
-        <a class="btn-lime" href="#contact">Contact Us</a>
+        <a class="btn-teal" href="#">Partner Services</a>
+        <a class="btn-lime" href="#">Contact Us</a>
       </div>
     </div>
-    <div class="parallax-img"><img src="/assets/img/global/slide2.svg" class="slide-img" alt="Partner services illustration"></div>
+    <div class="parallax-img"><img src="slide2.svg" class="slide-img" alt="Partner services illustration"></div>
   </div>
 
   <!-- PARALLAX SECTION 3 - CLINICS -->
   <div class="parallax-section">
     <div class="text-content">
-      <h2>Inservio offers a comprehensive range of services to save your clinic time and money.</h2>
+      <h2>Inservio offers a comprehensive range of services to save your clinic time and reduce administrative costs.</h2>
       <div class="buttons">
-        <a class="btn-teal" href="/pages/clinics/">Clinic Services Info</a>
-        <a class="btn-lime" href="#contact">Contact Us</a>
+        <a class="btn-teal" href="#">Clinic Services Info</a>
+        <a class="btn-lime" href="#">Contact Us</a>
       </div>
     </div>
-    <div class="parallax-img"><img src="/assets/img/global/slide3.svg" class="slide-img" alt="Clinic services illustration"></div>
+    <div class="parallax-img"><img src="slide3.svg" class="slide-img" alt="Clinic services illustration"></div>
   </div>
 
   <!-- CONTACT FORM -->
