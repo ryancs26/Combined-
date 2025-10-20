@@ -228,7 +228,6 @@
 
 <!-- CONTACT FORM -->
 <section class="contact" id="contact">
-  <!-- Inline styles so it works from this HTML alone -->
   <style>
     /* keep honeypot accessible but hidden */
     .visually-hidden {
@@ -251,15 +250,17 @@
       font-weight:700;
     }
 
-    /* grid like the “second image” */
+    /* grid layout */
     .contact form{
       display:grid;
       grid-template-columns:repeat(12, minmax(0,1fr));
       column-gap:24px;
       row-gap:20px;
     }
+
     /* half-width fields by default */
     .contact form > div:not(.full){ grid-column:span 6; }
+
     /* full-width rows */
     .contact form > .full{ grid-column:1 / -1; }
 
@@ -288,8 +289,16 @@
     .contact textarea{ min-height:200px; resize:vertical; }
 
     /* checkbox row and submit button */
-    .contact .checkbox{ display:flex; align-items:center; gap:10px; }
-    .contact .submit-wrap{ margin-top:6px; }
+    .contact .checkbox{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:flex-start; /* ✅ ensures left alignment */
+    }
+    .contact .checkbox input{ width:auto; }
+
+    .contact .submit-wrap{ margin-top:6px; text-align:center; }
+
     .contact .submit-btn{
       background:#098276; color:#fff; border:0; padding:14px 20px; border-radius:12px;
       font-weight:600; cursor:pointer; box-shadow:0 6px 16px rgba(9,130,118,.25);
@@ -307,7 +316,7 @@
   <div class="container">
     <h2>Get in touch today</h2>
 
-    <!-- NOTE: action="/thank-you" is optional; create /thank-you page if you keep it -->
+    <!-- Optional "action" attribute for thank-you page -->
     <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
       <input type="hidden" name="form-name" value="contact">
       <p class="visually-hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
