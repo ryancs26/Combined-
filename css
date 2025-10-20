@@ -178,4 +178,53 @@ html,body{
   .contact form{ grid-template-columns:1fr; }
   .contact form > div{ grid-column:1 / -1; }
 }
+/* --- FINAL FIX: Properly center contact form --- */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 90px 24px;
+  background: #f7f8f9;
+}
 
+.contact .container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 26px rgba(0,0,0,.07);
+  padding: 40px;
+}
+
+/* Ensure the grid distributes evenly */
+.contact form {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 20px;
+  width: 100%;
+}
+
+.contact form > div:not(.full) {
+  grid-column: span 6;
+}
+
+.contact form > .full {
+  grid-column: 1 / -1;
+}
+
+/* Center submit button */
+.contact .submit-wrap {
+  text-align: center;
+}
+
+/* On mobile: stack neatly */
+@media (max-width: 900px) {
+  .contact form {
+    grid-template-columns: 1fr;
+  }
+  .contact form > div {
+    grid-column: 1 / -1;
+  }
+}
