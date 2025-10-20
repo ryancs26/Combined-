@@ -3,15 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inservio Health — Home</title>
+  <title>Inservio Health — Pay Invoice</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Preload key media -->
-  <link rel="preload" as="image" href="/assets/img/global/slide1.svg">
-  <link rel="preload" as="image" href="/assets/img/global/slide2.svg">
-  <link rel="preload" as="image" href="/Combined/assets/img/global/slide3.svg">
-  <link rel="preload" as="video" href="/assets/video/homevideo1.mp4" type="video/mp4">
 
   <style>
     :root{
@@ -46,7 +40,7 @@
       scroll-behavior:smooth;
     }
 
-    /* NAVBAR */
+      /* NAVBAR */
     .navbar{ position:sticky; top:0; z-index:10; background:#fff; }
     .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; }
     .brand img{ height:34px; width:auto; display:block; }
@@ -171,9 +165,9 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="row">
-      <div class="brand"><<img src="Inservio-logo.svg" alt="Inservio logo">
+      <div class="brand"><img src="Inservio-logo.svg" alt="Inservio logo" /></div>
       <nav class="nav-links">
-        <a href="/">Home</a>
+  <a href="/">Home</a>
         <a href="/pages/partners/">Partners</a>
         <a href="/pages/clinics/">Clinics</a>
         <a href="/pages/patients/">Patients</a>
@@ -187,8 +181,8 @@
 
   <!-- HERO VIDEO -->
   <div class="hero">
-    <video autoplay muted loop playsinline preload="metadata" poster="/Combined-/assets/img/global/slide1.svg">
-      <source src="/Combined-/assets/video/homevideo1.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline>
+      <source src="istockphoto-1441876524-640_adpp_is.mp4" type="video/mp4">
     </video>
     <div class="hero-text">
       Our mission is to make lives easier for patients, clinics and our partners
@@ -205,9 +199,7 @@
         <a class="btn-teal" href="#">Contact Us</a>
       </div>
     </div>
-    <div class="parallax-img">
-      <img src="/Combined-/assets/img/global/slide1.svg" class="slide-img" alt="Patient services illustration">
-    </div>
+    <div class="parallax-img"><img src="slide1.svg" class="slide-img" alt="Patient services illustration"></div>
   </div>
 
   <!-- PARALLAX SECTION 2 - PARTNERS -->
@@ -219,9 +211,7 @@
         <a class="btn-lime" href="#">Contact Us</a>
       </div>
     </div>
-    <div class="parallax-img">
-      <img src="/Combined-/assets/img/global/slide2.svg" class="slide-img" alt="Partner services illustration">
-    </div>
+    <div class="parallax-img"><img src="slide2.svg" class="slide-img" alt="Partner services illustration"></div>
   </div>
 
   <!-- PARALLAX SECTION 3 - CLINICS -->
@@ -233,9 +223,7 @@
         <a class="btn-lime" href="#">Contact Us</a>
       </div>
     </div>
-    <div class="parallax-img">
-      <img src="/Combined-/assets/img/global/slide3.svg" class="slide-img" alt="Clinic services illustration">
-    </div>
+    <div class="parallax-img"><img src="slide3.svg" class="slide-img" alt="Clinic services illustration"></div>
   </div>
 
   <!-- CONTACT FORM -->
@@ -338,4 +326,3 @@
   </script>
 </body>
 </html>
-
