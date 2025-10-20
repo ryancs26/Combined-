@@ -210,3 +210,42 @@ textarea{ min-height:140px; resize:vertical; }
   .slide-img{ width:100%; height:auto; }
   form{ grid-template-columns:1fr; }
 }
+
+/* 1) Stop horizontal scrolling */
+html, body { overflow-x: hidden; }
+img, video { max-width: 100%; height: auto; }
+
+/* 2) Hero/first section behaves full-bleed and covers */
+.hero, .hero > .container, .hero > .wrap { width: 100%; max-width: 100%; }
+.hero { position: relative; min-height: 70vh; overflow: hidden; }
+.hero img, .hero video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* 3) Restore desktop layout at larger widths */
+@media (min-width: 992px) {
+  :root { --site-max: 1200px; }
+
+  /* Main layout container */
+  .container, .wrap, .site-width, .page-wrap {
+    max-width: var(--site-max);
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    box-sizing: border-box;
+  }
+
+  /* Nav/header container too */
+  .header .container, .navbar .container {
+    max-width: var(--site-max);
+    margin: 0 auto;
+  }
+
+  /* Typical desktop spacing & type scale */
+  .section { padding: 60px 0; }
+  h1 { font-size: clamp(44px, 4vw, 72px); line-height: 1.1; }
+}
+ 
+/* 4) Put truly-mobile tweaks *inside* a small-screen query */
+@media (max-width: 767px) {
+  .section { padding: 28px 0; }
+  .hero { min-height: 45vh; }
+  h1 { font-size: clamp(26px, 7vw, 36px); }
