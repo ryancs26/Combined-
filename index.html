@@ -228,149 +228,134 @@
 
 <!-- CONTACT FORM -->
 <section class="contact" id="contact">
+  <!-- Inline styles so it works from this HTML alone -->
   <style>
-    /* Center the whole block, constrain width */
-    .contact .container {
-      max-width: 1080px;              /* adjust 960–1200px to taste */
-      margin: 0 auto;                  /* centers */
-      padding: 24px 24px 40px;
-    }
-
-    /* Headline centered; labels left for readability */
-    .contact h2 {
-      text-align: center;
-      margin: 0 0 28px;
-    }
-
-    /* Keep honeypot accessible but hidden */
+    /* keep honeypot accessible but hidden */
     .visually-hidden {
       position: absolute !important; width:1px; height:1px; padding:0; margin:-1px;
       overflow:hidden; clip:rect(0,0,1px,1px); white-space:nowrap; border:0;
     }
 
-    /* Grid similar to the second image */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;                       /* vertical + horizontal gap on mobile */
+    /* center and size the card */
+    .contact .container{
+      max-width:1100px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 8px 26px rgba(0,0,0,.07);
+      padding:40px 32px;
+    }
+    .contact h2{
+      text-align:center;
+      margin:0 0 28px;
+      font-weight:700;
     }
 
-    /* Field blocks */
-    .field label,
-    .full label {
-      display: inline-block;
-      margin-bottom: 8px;
+    /* grid like the “second image” */
+    .contact form{
+      display:grid;
+      grid-template-columns:repeat(12, minmax(0,1fr));
+      column-gap:24px;
+      row-gap:20px;
     }
+    /* half-width fields by default */
+    .contact form > div:not(.full){ grid-column:span 6; }
+    /* full-width rows */
+    .contact form > .full{ grid-column:1 / -1; }
 
-    /* Input look: roomy + rounded like the second image */
-    .form-grid input[type="text"],
-    .form-grid input[type="email"],
-    .form-grid select,
-    .form-grid textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 14px 16px;
-      border: 1px solid #e3e6ea;
-      border-radius: 12px;
-      outline: none;
+    /* inputs look + spacing */
+    .contact label{ display:block; margin-bottom:8px; color:#444; font-size:.95rem; }
+    .contact input,
+    .contact select,
+    .contact textarea{
+      width:100%;
+      padding:14px 16px;
+      border:1px solid #e2e3e6;
+      border-radius:12px;
       font: inherit;
+      color:#111;
+      background:#fff;
+      outline:none;
+      box-sizing:border-box;
+      transition:border .15s, box-shadow .15s;
     }
-    .form-grid textarea { min-height: 180px; }
+    .contact input:focus,
+    .contact select:focus,
+    .contact textarea:focus{
+      border-color:#098276;
+      box-shadow:0 0 0 3px rgba(9,130,118,.12);
+    }
+    .contact textarea{ min-height:200px; resize:vertical; }
 
-    /* Checkbox alignment */
-    .checkbox { display: flex; align-items: center; gap: 10px; }
+    /* checkbox row and submit button */
+    .contact .checkbox{ display:flex; align-items:center; gap:10px; }
+    .contact .submit-wrap{ margin-top:6px; }
+    .contact .submit-btn{
+      background:#098276; color:#fff; border:0; padding:14px 20px; border-radius:12px;
+      font-weight:600; cursor:pointer; box-shadow:0 6px 16px rgba(9,130,118,.25);
+      transition:transform .15s, background .15s;
+    }
+    .contact .submit-btn:hover{ background:#06685e; transform:translateY(-1px); }
 
-    /* reCAPTCHA block */
-    .recaptcha { display: block; }
-
-    /* Submit row */
-    .submit-wrap { margin-top: 8px; }
-    .submit-wrap .submit-btn { padding: 12px 20px; border-radius: 12px; }
-
-    /* Desktop: two balanced columns like the second image */
-    @media (min-width: 900px) {
-      .form-grid {
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-        column-gap: 24px;
-        row-gap: 20px;
-      }
-      /* First + Last name on one row */
-      .field.fn   { grid-column: 1 / span 6; }
-      .field.ln   { grid-column: 7 / span 6; }
-
-      /* Email + Enquiry on one row, each half width (stretched like the second image) */
-      .field.email   { grid-column: 1 / span 6; }
-      .field.enquiry { grid-column: 7 / span 6; }
-
-      /* Full-width rows */
-      .full { grid-column: 1 / -1; }
+    /* mobile: stack everything */
+    @media (max-width:900px){
+      .contact form{ grid-template-columns:1fr; }
+      .contact form > div{ grid-column:1 / -1 !important; }
     }
   </style>
 
   <div class="container">
     <h2>Get in touch today</h2>
 
-    <form
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
-      action="/thank-you"
-    >
+    <!-- NOTE: action="/thank-you" is optional; create /thank-you page if you keep it -->
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
       <input type="hidden" name="form-name" value="contact">
       <p class="visually-hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
-      <div class="form-grid">
-        <!-- Row 1 -->
-        <div class="field fn">
-          <label for="firstName">First name</label>
-          <input type="text" id="firstName" name="firstName" placeholder="First name" required autocomplete="given-name">
-        </div>
+      <div>
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="First name" required autocomplete="given-name">
+      </div>
 
-        <div class="field ln">
-          <label for="lastName">Last name</label>
-          <input type="text" id="lastName" name="lastName" placeholder="Last name" autocomplete="family-name">
-        </div>
+      <div>
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Last name" autocomplete="family-name">
+      </div>
 
-        <!-- Row 2 -->
-        <div class="field email">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
-        </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+      </div>
 
-        <div class="field enquiry">
-          <label for="enquiry">Enquiry type</label>
-          <select id="enquiry" name="enquiry" required>
-            <option value="" selected disabled>Select an option</option>
-            <option>Ophthalmology</option>
-            <option>Invoice</option>
-            <option>Clinic</option>
-            <option>B2B/Partner</option>
-            <option>Other</option>
-          </select>
-        </div>
+      <div>
+        <label for="enquiry">Enquiry type</label>
+        <select id="enquiry" name="enquiry" required>
+          <option value="" selected disabled>Select an option</option>
+          <option>Ophthalmology</option>
+          <option>Invoice</option>
+          <option>Clinic</option>
+          <option>B2B/Partner</option>
+          <option>Other</option>
+        </select>
+      </div>
 
-        <!-- Message (full width) -->
-        <div class="full">
-          <label for="message">Your message</label>
-          <textarea id="message" name="message" placeholder="How can we help?"></textarea>
-        </div>
+      <div class="full">
+        <label for="message">Your message</label>
+        <textarea id="message" name="message" placeholder="How can we help?"></textarea>
+      </div>
 
-        <!-- Checkbox (full width) -->
-        <div class="full checkbox">
-          <input type="checkbox" id="confirmEmail" name="confirmEmail">
-          <label for="confirmEmail">Send me a confirmation email</label>
-        </div>
+      <div class="full checkbox">
+        <input type="checkbox" id="confirmEmail" name="confirmEmail">
+        <label for="confirmEmail">Send me a confirmation email</label>
+      </div>
 
-        <!-- reCAPTCHA (full width) -->
-        <div class="full recaptcha">
-          <div data-netlify-recaptcha="true"></div>
-        </div>
+      <!-- Netlify reCAPTCHA -->
+      <div class="full recaptcha">
+        <div data-netlify-recaptcha="true"></div>
+      </div>
 
-        <!-- Submit (full width; container is centered) -->
-        <div class="full submit-wrap">
-          <button type="submit" class="submit-btn">Submit enquiry</button>
-        </div>
+      <div class="full submit-wrap">
+        <button type="submit" class="submit-btn">Submit enquiry</button>
       </div>
     </form>
   </div>
