@@ -393,4 +393,54 @@
     const phoneDisplay = document.getElementById('phoneDisplay');
     document.querySelectorAll('.dot-option').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.dot-option').fo
+        document.querySelectorAll('.dot-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const number = phoneMap[btn.dataset.state];
+        phoneDisplay.innerHTML = number ? `<a href="tel:${number.replace(/[^0-9]/g, '')}">${number}</a>` : '';
+        phoneDisplay.classList.toggle('visible', !!number);
+      });
+    });
+  </script>
+
+  <!-- ADDED: Inline hamburger JS fix (kept everything else the same) -->
+  <script>
+  (function(){
+    const btn = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('mobile-drawer');
+    const overlay = document.getElementById('mobile-overlay');
+    if (!btn || !drawer || !overlay) { console.warn('Hamburger: missing elements'); return; }
+
+    function openMenu(){
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-expanded','true');
+      drawer.hidden = false; overlay.hidden = false;
+      requestAnimationFrame(()=>{ drawer.classList.add('open'); overlay.classList.add('show'); });
+      drawer.querySelector('a')?.focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(){
+      btn.classList.remove('is-active');
+      btn.setAttribute('aria-expanded','false');
+      drawer.classList.remove('open'); overlay.classList.remove('show');
+      setTimeout(()=>{ drawer.hidden = true; overlay.hidden = true; }, 180);
+      document.removeEventListener('keydown', onKeydown);
+      btn.focus();
+    }
+    function onKeydown(e){ if (e.key === 'Escape') closeMenu(); }
+
+    btn.addEventListener('click', () =>
+      (btn.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu())
+    );
+    overlay.addEventListener('click', closeMenu);
+    drawer.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
+
+    // Close if resized to desktop (with safe fallback)
+    const mq = window.matchMedia('(min-width: 901px)');
+    const onChange = e => { if (e.matches && btn.getAttribute('aria-expanded') === 'true') closeMenu(); };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+  })();
+  </script>
+</body>
+</html>
+
