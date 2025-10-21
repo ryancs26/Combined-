@@ -31,9 +31,9 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="row">
-      <div class="brand"><img src="/assets/img/global/Inservio-logo.svg" alt="Inservio logo" /></div>
+      <div class="brand"><img src="Inservio-logo.svg" alt="Inservio logo" /></div>
       <nav class="nav-links">
-   <a href="/">Home</a>
+        <a href="/">Home</a>
         <a href="/pages/partners/">Partners</a>
         <a href="/pages/clinics/">Clinics</a>
         <a href="/pages/patients/">Patients</a>
@@ -48,7 +48,7 @@
   <!-- HERO VIDEO -->
   <section class="hero" aria-label="Hero">
     <video autoplay muted loop playsinline>
-      <source src="/assets/video/webvid1.mp4" type="video/mp4" />
+      <source src="webvid1.mp4" type="video/mp4" />
     </video>
     <div class="hero-inner">
       <div class="hero-text">
@@ -71,12 +71,21 @@
       <!-- LIST 1 -->
       <ul class="feature-list">
         <li>
-          <img class="feature-icon" src="/assets/img/global/1therm.svg" alt="Thermometer icon">
+          <!-- Thermometer (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 14.76V5a2 2 0 0 0-4 0v9.76A4 4 0 1 0 14 14.76z"/>
+          </svg>
           <span class="feature-text">End-to-end temperature control and auditability.</span>
         </li>
 
         <li>
-          <img class="feature-icon" src="/assets/img/global/6tick.svg" alt="Tick icon">
+          <!-- Check-circle (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
           <span class="feature-text">Validated processes aligned to regulatory requirements.</span>
         </li>
       </ul>
@@ -91,11 +100,23 @@
       <!-- LIST 2 -->
       <ul class="feature-list">
         <li>
-          <img class="feature-icon" src="/assets/img/global/2dot.svg" alt="Target icon">
+          <!-- Target / multi-ring (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
           <span class="feature-text">Real-time tracking and transparent reporting.</span>
         </li>
         <li>
-          <img class="feature-icon" src="/assets/img/global/4intergrat.svg" alt="Integrated links icon">
+          <!-- Integrated links (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 7h3a5 5 0 0 1 0 10h-3"/>
+            <path d="M9 17H6A5 5 0 0 1 6 7h3"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
           <span class="feature-text">Integrated systems that reduce risk and lead time.</span>
         </li>
       </ul>
@@ -110,14 +131,78 @@
       <!-- LIST 3 -->
       <ul class="feature-list">
         <li>
-          <img class="feature-icon" src="/assets/img/global/5seamless.svg" alt="Seamless coordination icon">
+          <!-- Seamless coordination / share graph (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
           <span class="feature-text">Seamless coordination between manufacturers, clinics, and patients.</span>
         </li>
         <li>
-          <img class="feature-icon" src="/assets/img/global/7sheild.svg" alt="Shield icon">
+          <!-- Shield (outline) -->
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+          </svg>
           <span class="feature-text">Carefully governed processes to accelerate access to therapy.</span>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Get in touch today</h2>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p class="visually-hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+        <div>
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+        </div>
+
+        <div>
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Last name">
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+
+        <div>
+          <label for="enquiry">Enquiry type</label>
+          <select id="enquiry" name="enquiry" required>
+            <option value="" selected disabled>Select an option</option>
+            <option>Ophthalmology</option>
+            <option>Invoice</option>
+            <option>Clinic</option>
+            <option>B2B/Partner</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" placeholder="How can we help?"></textarea>
+        </div>
+
+        <div class="full checkbox">
+          <input type="checkbox" id="confirmEmail" name="confirmEmail">
+          <label for="confirmEmail">Send me a confirmation email</label>
+        </div>
+
+        <div class="full submit-wrap">
+          <button type="submit" class="submit-btn">Submit enquiry</button>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -168,4 +253,3 @@
     });
   </script>
 </body>
-</html>
