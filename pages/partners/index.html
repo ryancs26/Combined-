@@ -24,26 +24,88 @@
     .nav-links a{font-weight:700; color:#000; text-decoration:none; transition:color .25s ease;}
     .nav-links a:hover{color:var(--lime);}
     .lime-bar{height:4px; background:var(--lime);}
+
+    /* === ADDED: Hamburger + Drawer (only additions, no changes to above) === */
+    :root{ --hdr-h:64px; --shadow-lg:0 10px 28px rgba(0,0,0,.12); }
+    .nav-desktop{ display:flex; align-items:center; }
+    @media (max-width:900px){ .nav-desktop{ display:none; } }
+    .nav-toggle{ border:0; background:transparent; padding:10px; margin-left:auto; display:none; cursor:pointer; line-height:0; }
+    @media (max-width:900px){ .nav-toggle{ display:inline-flex; } }
+    .nav-toggle-box{ width:28px; height:20px; position:relative; display:inline-block; }
+    .nav-toggle-inner, .nav-toggle-inner::before, .nav-toggle-inner::after{
+      position:absolute; left:0; width:28px; height:2px; background:#000;
+      transition:transform .25s ease, opacity .2s ease, background .2s;
+    }
+    .nav-toggle-inner{ top:9px; }
+    .nav-toggle-inner::before{ content:""; top:-9px; }
+    .nav-toggle-inner::after{ content:""; top:9px; }
+    .nav-toggle.is-active .nav-toggle-inner{ transform:rotate(45deg); }
+    .nav-toggle.is-active .nav-toggle-inner::before{ transform:translateY(9px) rotate(90deg); }
+    .nav-toggle.is-active .nav-toggle-inner::after{ transform:translateY(-9px) rotate(90deg); opacity:0; }
+    .mobile-drawer{
+      position:fixed; top:var(--hdr-h); left:0; right:0; background:#fff; box-shadow:var(--shadow-lg); z-index:1000;
+      transform:translateY(-8px); opacity:0; pointer-events:none; transition:transform .2s ease, opacity .2s ease;
+      border-top:3px solid var(--lime);
+    }
+    .mobile-drawer.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+    .mobile-links{ list-style:none; margin:0; padding:10px 14px; }
+    .mobile-links li{ border-bottom:1px solid #efefef; }
+    .mobile-links li:last-child{ border-bottom:none; }
+    .mobile-links a{ display:block; padding:14px 8px; text-decoration:none; font-weight:700; color:#000; transition:color .2s, background .2s; }
+    .mobile-links a:hover{ color:#098276; background:rgba(9,130,118,.06); }
+    .mobile-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.28); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:999; }
+    .mobile-overlay.show{ opacity:1; pointer-events:auto; }
+    .navbar{ min-height:var(--hdr-h); }
+    .navbar .row{ min-height:var(--hdr-h); }
+    @media (prefers-reduced-motion:reduce){
+      .nav-toggle-inner, .nav-toggle-inner::before, .nav-toggle-inner::after, .mobile-drawer, .mobile-overlay{ transition:none; }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="row">
+  <header class="navbar" role="banner">
+    <div class="row" role="navigation" aria-label="Main">
       <div class="brand"><img src="/assets/img/global/Inservio-logo.svg" alt="Inservio logo" /></div>
-      <nav class="nav-links">
-  <a href="/">Home</a>
-        <a href="/pages/partners/">Partners</a>
-        <a href="/pages/clinics/">Clinics</a>
-        <a href="/pages/patients/">Patients</a>
-        <a href="/pages/pay-invoice/">Pay Invoice</a>
-        <a href="/pages/privacy-policy/">Privacy Policy</a>
-        <a href="/pages/about-us/">About Us</a>
+
+      <!-- Desktop links (unchanged) -->
+      <nav class="nav-desktop" aria-label="Primary">
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/pages/partners/">Partners</a>
+          <a href="/pages/clinics/">Clinics</a>
+          <a href="/pages/patients/">Patients</a>
+          <a href="/pages/pay-invoice/">Pay Invoice</a>
+          <a href="/pages/privacy-policy/">Privacy Policy</a>
+          <a href="/pages/about-us/">About Us</a>
+        </div>
       </nav>
+
+      <!-- Mobile hamburger -->
+      <button class="nav-toggle" id="nav-toggle"
+              aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <span class="nav-toggle-box" aria-hidden="true">
+          <span class="nav-toggle-inner"></span>
+        </span>
+      </button>
     </div>
     <div class="lime-bar" aria-hidden="true"></div>
   </header>
+
+  <!-- Mobile drawer + overlay (ADDED) -->
+  <nav class="mobile-drawer" id="mobile-drawer" hidden>
+    <ul class="mobile-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/partners/">Partners</a></li>
+      <li><a href="/pages/clinics/">Clinics</a></li>
+      <li><a href="/pages/patients/">Patients</a></li>
+      <li><a href="/pages/pay-invoice/">Pay Invoice</a></li>
+      <li><a href="/pages/privacy-policy/">Privacy Policy</a></li>
+      <li><a href="/pages/about-us/">About Us</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-overlay" id="mobile-overlay" hidden></div>
   
   <!-- HERO VIDEO -->
   <section class="hero" aria-label="Hero">
@@ -331,15 +393,4 @@
     const phoneDisplay = document.getElementById('phoneDisplay');
     document.querySelectorAll('.dot-option').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.dot-option').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const number = phoneMap[btn.dataset.state];
-        phoneDisplay.innerHTML = number ? `<a href="tel:${number.replace(/[^0-9]/g, '')}">${number}</a>` : '';
-        phoneDisplay.classList.toggle('visible', !!number);
-      });
-    });
-  </script>
-</body>
-</html>
-  
-  
+        document.querySelectorAll('.dot-option').fo
