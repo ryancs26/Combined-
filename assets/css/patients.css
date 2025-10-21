@@ -4,6 +4,77 @@
   --neutral:#aaabb1;
 }
 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Inservio — About Us</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================
+       Tokens & Base
+       ========================= */
+    :root{
+      --lime:#BEF21C;
+      --inv-teal:#098276;
+      --neutral:#aaabb1;
+
+      --accent: var(--inv-teal);
+      --accent-soft: rgba(14,123,134,.10);
+      --text:#142028;
+      --muted:#6b7a86;
+      --ring: rgba(17,24,39,.08);
+      --card-bg:#ffffff;
+
+      --font-sans:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --page-pad: clamp(18px,4vw,36px);
+      --max-w: 1100px;
+    }
+
+    html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--text); font-family:var(--font-sans);
+      font-weight:400; line-height:1.65; background:#fff;
+    }
+
+    /* =========================
+       NAVBAR
+       ========================= */
+    .navbar{
+      position: sticky; top: 0; z-index: 1000; background:#fff;
+    }
+    .navbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 30px;
+    }
+    .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+    .brand img{ height:34px; width:auto; display:block; }
+    .nav-links{ display:flex; flex-wrap:wrap; gap:22px; }
+    .nav-links a{
+      text-decoration:none; font-weight:700; font-size:1rem; color:#000; transition:color .25s ease;
+    }
+    .nav-links a:hover{ color: var(--lime); }
+    .nav-links a[aria-current="page"]{
+      color: var(--inv-teal);
+      border-bottom: 2px solid var(--lime);
+      padding-bottom: 2px;
+    }
+    .lime-bar{ height:4px; background: var(--lime); }
+
+    /* Mobile-friendly scroll for nav */
+    @media (max-width: 900px){
+      .navbar .row{ padding:10px 16px; }
+      .nav-links{
+        gap:12px; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;
+      }
+      .nav-links::-webkit-scrollbar{ display:none; }
+    }
+
 /* Base + Reset */
 *{ box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -11,82 +82,80 @@ body{
   margin:0;
   font-family:'Poppins',sans-serif;
   color:#000;
-  font-size:20px;            /* base size = 20px */
+  font-size:20px;
   line-height:1.65;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
+
+
 }
 
-/* HERO */
-.hero{ position:relative; width:100%; height:72vh; min-height:420px; overflow:hidden; }
-.hero video{ width:100%; height:100%; object-fit:cover; display:block; }
-.hero::before{ content:""; position:absolute; inset:0; background:rgba(0,0,0,.18); z-index:1; }
-.hero-inner{ position:absolute; inset:0; display:grid; place-items:center; z-index:2; padding:0 20px; }
-.hero-text{
-  text-align:center; color:#fff; line-height:1.3; max-width:60ch;
-  font-weight:700; letter-spacing:.2px; font-size:clamp(1.2rem,3.5vw,1.6rem); /* ~24–32px visual */
-  text-shadow:2px 2px 6px rgba(0,0,0,.45); opacity:0; transform:translateY(12px);
-  animation:fadeInUp .9s ease-out forwards .2s;
+/* White card to match your Patient Information style */
+.hero-card{
+  max-width: 1100px;                       /* align with your content width */
+  margin: 0 auto 24px;                     /* center + small gap below */
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(17,24,39,0.10),
+              0 1px 0 rgba(17,24,39,.08) inset;
+  overflow: hidden;                         /* rounds video corners */
+  aspect-ratio: 16 / 9;                     /* keep 1280×720 shape */
+  position: relative;
 }
-.hero-text .highlight{ color:var(--lime); }
-@keyframes fadeInUp{ to{ opacity:1; transform:translateY(0); } }
 
-/* CONTENT WRAPPER */
+/* Video shows full frame inside the card (no crop) */
+.hero-card video{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;                      /* full video visible */
+  background: #fff;                         /* any side bars match the card */
+  display: block;
+}
+
+/* CONTENT WRAPPER (generic) */
 .content--engaging{
   background:linear-gradient(180deg,#fff 0%,#fafafa 100%);
   border-radius:12px; padding:48px 24px; margin:32px auto; max-width:960px;
 }
 .copy{ max-width:900px; margin:0 auto; }
 .sub-heading{
-  font-size:1.1rem;        /* ~22px */
+  font-size:1.1rem;
   font-weight:600; color:var(--inv-teal);
   margin:22px 0 10px;
 }
 .content--engaging p{
   line-height:1.8;
-  font-size:1rem;          /* 20px body size */
+  font-size:1rem;
   color:#6d6e75;
   margin:0 0 14px;
 }
 
-/* FEATURE LIST */
+/* FEATURE LIST (generic) */
 .feature-list{ list-style:none; padding-left:0; margin:18px 0 6px; }
 .feature-list li{
   display:grid;
-  grid-template-columns:16px 1fr;  /* fixed icon + flexible text */
+  grid-template-columns:16px 1fr;
   column-gap:12px;
   align-items:center;
   margin-bottom:12px;
   color:#6d6e75;
   line-height:1.6;
-  font-size:1rem;          /* 20px */
+  font-size:1rem;
   opacity:0;
   transform:translateY(10px);
   transition:opacity .35s, transform .35s;
 }
 .feature-list li.reveal{ opacity:1; transform:translateY(0); }
-
-/* inline outline SVG icons (all teal by default) */
 .feature-list .feature-icon{
   width:16px; height:16px; stroke-width:2; flex-shrink:0; margin:0;
   color: var(--inv-teal);
   transition: transform .25s ease, color .25s ease, filter .25s ease;
 }
-
-.feature-list .feature-text{
-  font-size:1rem;          /* 20px */
-  line-height:1.6;
-  display:block;
-}
-
-/* hover effect: icon glow + pop */
 .feature-list li:hover .feature-icon {
   transform: scale(1.25);
   color: var(--lime);
   filter: drop-shadow(0 0 4px rgba(190,242,28,.45));
 }
-
-/* reveal nicety for SVGs */
 .feature-list li.reveal svg{ animation:iconPop .38s cubic-bezier(.2,.7,.3,1.2); }
 @keyframes iconPop{ 0%{transform:scale(.85);} 60%{transform:scale(1.08);} 100%{transform:scale(1);} }
 
@@ -96,12 +165,10 @@ body{
   max-width:980px; margin:0 auto; background:#fff; border-radius:16px;
   box-shadow:0 8px 26px rgba(0,0,0,.07); padding:32px;
 }
-.contact h2{ margin:0 0 16px; font-size:1.4rem; font-weight:700; color:#000; } /* ~28px */
-form{
-  display:grid; grid-template-columns:1fr 1fr; gap:16px 20px;
-}
+.contact h2{ margin:0 0 16px; font-size:1.4rem; font-weight:700; color:#000; }
+form{ display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; }
 .full{ grid-column:1/-1; }
-label{ display:block; font-size:.8rem; color:#444; margin-bottom:8px; } /* ~16px */
+label{ display:block; font-size:.8rem; color:#444; margin-bottom:8px; }
 input, select, textarea{
   width:100%; padding:12px 14px; border:1px solid #e2e3e6; border-radius:10px;
   font-family:'Poppins',sans-serif; font-size:.9rem; color:#111; background:#fff;
@@ -143,13 +210,204 @@ textarea{ min-height:150px; resize:vertical; }
 }
 .phone-display.visible{ opacity:1; transform:translateY(0); }
 .phone-display a{ color:#1c1c1c; text-decoration:none; border-bottom:2px dotted var(--neutral); padding-bottom:4px; transition:color .25s; }
-.phone-display a:hover{ color:var(--lime); }
+.phone-display a:hover{ color:#BEF21C; }
 
 /* UTILITIES */
 .visually-hidden{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
 
 /* =========================
-   RESPONSIVE (Mobile-first)
+   Patient Information Card
+   (matches the second screenshot)
+   ========================= */
+:root{
+  --accent:#0e7b86;   /* teal */
+  --card-bg:#ffffff;
+  --accent-soft:rgba(14,123,134,0.10);
+  --text:#142028;
+  --muted:#5a6a75;
+  --ring:rgba(17,24,39,.08);
+}
+
+.patient-info{
+  position:relative;
+  padding: clamp(2.5rem, 6vw, 5rem) 1.25rem;
+  background:
+    radial-gradient(80rem 80rem at -10% -10%, var(--accent-soft), transparent 55%),
+    radial-gradient(80rem 80rem at 120% 0%, var(--accent-soft), transparent 55%);
+}
+
+.patient-info__inner{
+  max-width:1100px;
+  margin:0 auto;
+  background:var(--card-bg);
+  border-radius:26px;
+  box-shadow:
+    0 24px 60px rgba(17, 24, 39, 0.10),
+    0 1px 0 var(--ring) inset;
+  display:grid;
+  grid-template-columns:92px 1fr;
+  gap:1.25rem;
+  padding: clamp(1.25rem, 3vw, 2.2rem);
+  align-items:start;
+}
+
+.patient-info__icon{
+  width:64px; height:64px;
+  border-radius:18px;
+  background: linear-gradient(180deg, var(--accent), #0a5e66);
+  color:#fff;
+  display:grid; place-items:center;
+  box-shadow:
+    0 14px 30px rgba(14,123,134,0.35),
+    0 0 0 8px rgba(14,123,134,0.08);
+  margin: .35rem .35rem 0 .35rem;
+}
+
+.patient-info__content{ color:var(--text); }
+
+.patient-info__eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:700;
+  color:var(--accent);
+  font-size:.82rem;
+  margin: .1rem 0 .35rem;
+}
+
+.patient-info__title{
+  font-weight:800;
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem); /* big, like screenshot */
+  line-height:1.1;
+  margin: 0 0 .6rem;
+}
+
+.patient-info__lead{
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  color:#6b7a86;
+  margin: 0 0 1.1rem;
+  max-width: 72ch;
+}
+
+/* Patient Info List — styled dot points */
+.patient-info__list {
+  list-style: none !important;   /* removes browser default bullets */
+  margin: .25rem 0 1.2rem;
+  padding: 0;
+  display: grid;
+  gap: .9rem;
+}
+
+.patient-info__list li {
+  position: relative;
+  padding-left: 2rem;            /* space for dot */
+  line-height: 1.55;
+  color: #0d0f12;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+}
+
+/* Teal dot */
+.patient-info__list li::before {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0.7em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background-color: var(--accent);   /* teal fill */
+  box-shadow: 0 0 0 3px rgba(14,123,134,0.1); /* subtle ring */
+  transition: transform .2s ease, background-color .25s ease;
+}
+
+/* UI hover effect */
+.patient-info__list li:hover::before {
+  transform: scale(1.2);
+  background-color: #06685e;        /* darker teal on hover */
+}
+
+/* supporting line */
+.patient-info__footnote{
+  color:#6b7a86;
+  font-size: .98rem;
+  margin: .35rem 0 0;
+  max-width: 80ch;
+}
+
+/* Responsive */
+@media (max-width: 640px){
+  .patient-info__inner{
+    grid-template-columns: 1fr;
+    gap:1rem;
+    border-radius:22px;
+  }
+  .patient-info__icon{ width:56px; height:56px; border-radius:14px; }
+}
+
+/* Entrance animation */
+@media (prefers-reduced-motion: no-preference){
+  .patient-info__inner{
+    opacity:0; transform: translateY(12px);
+    animation: patientFade .6s ease-out .05s forwards;
+  }
+  @keyframes patientFade{ to{ opacity:1; transform:translateY(0);} }
+}
+
+:root{
+  --lime:#BEF21C;
+  --inv-teal:#098276;
+  --neutral:#aaabb1;
+  --text:#4B4B4B;
+  --card-shadow: 0 18px 42px rgba(0,0,0,.08);
+}
+
+/* Card shell */
+.contact-card{
+  background:#fff;
+  border-radius:18px;
+  box-shadow: var(--card-shadow);
+  padding:28px 28px 24px;
+  max-width:1100px;
+  margin:32px auto;
+  border-top:6px solid var(--lime);
+  border-bottom:6px solid var(--inv-teal);
+}
+
+/* Heading with grey bar */
+.contact-card__title{
+  margin:0 0 20px;
+  color:var(--text);
+  font-size:clamp(1.4rem,3vw,2rem);
+  font-weight:800;
+  letter-spacing:.2px;
+  position:relative;
+  padding-left:18px;
+}
+.contact-card__title::before{
+  content:"";
+  position:absolute;
+  left:0; top:.15em; bottom:.15em;
+  width:8px;
+  border-radius:4px;
+  background:#c9cbd1; /* subtle grey bar */
+}
+
+/* Buttons row */
+.contact-card__buttons{
+  display:flex; flex-wrap:wrap;
+  gap:18px; margin-bottom:16px;
+}
+.state-btn{
+  appearance:none; border:2px solid transparent;
+  background: var(--neutral);
+  color:#fff; font-weight:700; letter-spacing:.5px;
+  padding:12px 22px; border-radius:999px; cursor:pointer;
+  transition: all .2s ease;
+}
+.state-btn:hover{ filter:
+
+
+/* =========================
+   Responsive (site-wide)
    ========================= */
 @media (max-width: 900px){
   .navbar{ padding:16px 24px; }
@@ -160,10 +418,15 @@ textarea{ min-height:150px; resize:vertical; }
   form{ grid-template-columns:1fr; }
 }
 
+/* Navbar stripe = lime */
+.navbar .lime-bar{
+  background: var(--lime);   /* was var(--accent) */
+}
+
 @media (max-width: 640px){
-  body{ font-size:18px; }                /* scale base down slightly on small screens */
+  body{ font-size:18px; }
   .nav-links{ width:100%; justify-content:flex-start; }
-  .nav-links a{ font-size:.95rem; }      /* ~17px */
+  .nav-links a{ font-size:.95rem; }
   .hero{ height:56vh; min-height:360px; }
   .hero-text{ font-size:clamp(1.05rem,5vw,1.35rem); max-width:64ch; }
   .content--engaging{ padding:28px 18px; }
@@ -176,13 +439,13 @@ textarea{ min-height:150px; resize:vertical; }
   .contact-section{ margin:36px auto; }
 }
 
-/* REDUCED MOTION */
+/* Reduced motion */
 @media (prefers-reduced-motion:reduce){
   .hero-text{ animation:none; opacity:1; transform:none; }
   .feature-list li{ transition:none; opacity:1; transform:none; }
-  .feature-list li.reveal svg{ animation:none; }
 }
-/* Payment tiles: micro-interactions */
+
+/* Payment tiles (unchanged from your file) */
 .payment-card{
   position: relative;
   cursor: pointer;
@@ -192,19 +455,14 @@ textarea{ min-height:150px; resize:vertical; }
     border-color .22s ease,
     background .22s ease,
     filter .22s ease;
-  /* keeps the content centered while animating */
   will-change: transform, box-shadow, border-color, background, filter;
 }
-
-/* subtle hover lift + glow */
 .payment-card:hover{
   transform: translateY(-6px);
   box-shadow: 0 20px 50px rgba(14, 165, 163, .20);
   border-color: var(--accent);
   filter: saturate(1.03);
 }
-
-/* keyboard focus (accessible) */
 .payment-card:focus-visible{
   outline: 0;
   transform: translateY(-6px);
@@ -214,13 +472,7 @@ textarea{ min-height:150px; resize:vertical; }
     0 16px 42px rgba(14,165,163,.18);
   border-color: var(--accent);
 }
-
-/* pressed state */
-.payment-card:active{
-  transform: translateY(-2px);
-}
-
-/* optional "selected" style (toggled via JS) */
+.payment-card:active{ transform: translateY(-2px); }
 .payment-card.selected{
   background:
     radial-gradient(120% 120% at 0% 0%, rgba(198,251,65,.12), transparent 60%),
@@ -230,33 +482,47 @@ textarea{ min-height:150px; resize:vertical; }
     0 0 0 2px rgba(198,251,65,.65) inset,
     0 18px 42px rgba(14,165,163,.20);
 }
-
-/* check badge that appears when selected */
 .payment-card .badge{
-  position:absolute;
-  top:10px; right:10px;
-  height:26px; width:26px;
-  border-radius:999px;
-  background: var(--accent);
-  box-shadow: 0 6px 14px rgba(198,251,65,.45);
-  display:grid; place-items:center;
-  color:#0a2b20;
-  font-weight:800;
-  font-size:16px;
-  line-height:1;
-  transform: scale(.8);
-  opacity: 0;
-  transition: transform .18s ease, opacity .18s ease;
+  position:absolute; top:10px; right:10px;
+  height:26px; width:26px; border-radius:999px;
+  background: var(--accent); box-shadow: 0 6px 14px rgba(198,251,65,.45);
+  display:grid; place-items:center; color:#0a2b20; font-weight:800; font-size:16px; line-height:1;
+  transform: scale(.8); opacity: 0; transition: transform .18s ease, opacity .18s ease;
 }
 .payment-card.selected .badge{ transform: scale(1); opacity:1; }
+.payment-label{ display:block; margin-top:10px; font-weight:700; color:#495061; font-size:.95rem; }
 
-/* optional label under logos (if you add a <span class="payment-label">…) */
-.payment-label{
-  display:block;
-  margin-top:10px;
-  font-weight:700;
-  color:#495061;
-  font-size:.95rem;
+/* Patient info lead paragraph - highlight */
+.patient-info__lead {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: var(--text);
+  font-weight: 600;              /* bolden for emphasis */
+  background: rgba(14,123,134,0.06); /* soft teal highlight */
+  border-left: 4px solid var(--accent);
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  margin: 0 0 1.25rem;
+}
+
+/* Patient info lead paragraph - bigger, not bold */
+.patient-info__lead {
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem); /* larger than bullets */
+  color: var(--text);
+  font-weight: 400;                          /* normal weight */
+  background: rgba(14,123,134,0.04);         /* soft teal background */
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  margin: 0 0 1.5rem;
+  line-height: 1.7;
+}
+
+/* Patient info bullet list - keep slightly smaller */
+.patient-info__list li {
+  font-size: 1rem;        /* slightly smaller than lead */
+  font-weight: 400;
+  color: #222;
+  line-height: 1.55;
 }
 
 /* NAVBAR (aligned with previous theme) */
@@ -306,7 +572,100 @@ textarea{ min-height:150px; resize:vertical; }
   height:4px;
   background:var(--accent);
 }
+
 @media (max-width: 900px){
   .navbar .row{ padding:10px 20px; }
   .nav-links{ gap:14px; }
 }
+
+
+/* =========================
+   MOBILE UI TUNE-UPS
+   Paste at end of main.css
+   ========================= */
+
+/* --- Compact tablet tweaks --- */
+@media (max-width: 900px){
+  .navbar .row{ padding: 10px 16px; }
+  .brand img{ height: 28px; }
+
+  /* Make nav links horizontally scrollable (no hamburger needed) */
+  .nav-links{
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 0 8px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent);
+  }
+  .nav-links::-webkit-scrollbar{ display: none; }
+  .nav-links a{
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: .95rem;
+  }
+
+  /* Hero card: soften radius/shadow a bit on mobile */
+  .hero{ padding: 16px 12px; }
+  .hero-card{
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(17,24,39,.10), 0 1px 0 rgba(17,24,39,.06) inset;
+    max-width: 100%;
+  }
+
+  /* Patient info: slightly tighter spacing */
+  .patient-info{ padding: 32px 12px; }
+  .patient-info__inner{ padding: 16px; border-radius: 20px; }
+  .patient-info__title{ font-size: clamp(1.6rem, 5.4vw, 2.1rem); }
+  .patient-info__lead{ font-size: 1rem; padding: .9rem 1rem; }
+
+  /* Contact by State: switch to a neat grid */
+  .contact-section{ padding: 24px 16px; margin: 32px auto; }
+  .dot-selectors{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  .dot-option{ padding: 10px 12px; font-size: .95rem; }
+  .phone-display{ font-size: 1.15rem; }
+}
+
+/* --- Phone tweaks --- */
+@media (max-width: 640px){
+  /* keep banner height but ensure full frame fits; bars are white to match cards */
+  .hero-card{ aspect-ratio: 16 / 9; }
+  .hero-card video{
+    object-fit: contain;
+    background: #fff;
+  }
+
+  /* Bigger tap targets everywhere */
+  .nav-links a,
+  .dot-option,
+  .submit-btn{ min-height: 44px; }
+
+  /* Form: single column + comfy inputs */
+  form{ grid-template-columns: 1fr; gap: 12px; }
+  input, select, textarea{ font-size: 16px; padding: 12px 14px; } /* 16px avoids zoom on iOS */
+
+  /* Slightly smaller shadows to reduce paint on mobile GPUs */
+  .contact .container,
+  .hero-card,
+  .patient-info__inner{
+    box-shadow: 0 12px 28px rgba(17,24,39,.10), 0 1px 0 rgba(17,24,39,.06) inset;
+  }
+}
+
+/* Respect users who prefer less motion (keeps your existing animation, but disables it on request) */
+@media (prefers-reduced-motion: reduce){
+  .hero-card video{ animation: none; }
+  .hero-text{ animation: none; opacity: 1; transform: none; }
+  *{ scroll-behavior: auto; }
+}
+
+/* Optional: keep the navbar stripe lime only (in case earlier rules override) */
+.navbar .lime-bar{ background: var(--lime); }
