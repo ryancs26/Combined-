@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,6 +20,10 @@
       --radius: 22px;
       --maxw: 1040px;
       --ring: 0 22px 48px rgba(15,23,42,.10);
+
+      /* ADDED for mobile drawer */
+      --hdr-h: 64px;
+      --shadow-lg: 0 10px 28px rgba(0,0,0,.12);
     }
 
     html,body{
@@ -33,12 +39,53 @@
 
     /* NAVBAR */
     .navbar{ position:sticky; top:0; z-index:1000; background:#fff; }
-    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; gap:22px; }
+    .navbar .row{ display:flex; align-items:center; justify-content:space-between; padding:10px 30px; gap:22px; min-height: var(--hdr-h); }
     .brand img{ height:34px; width:auto; display:block; }
     .nav-links{ display:flex; gap:22px; flex-wrap:wrap; }
     .nav-links a{ font-weight:700; color:#000; text-decoration:none; transition:color .25s ease; }
     .nav-links a:hover{ color:var(--lime); }
     .lime-bar{ height:4px; background:var(--lime); width:100%; display:block; }
+
+    /* ADDED: hamburger button + mobile drawer (minimal) */
+    .nav-toggle{ border:0; background:transparent; padding:10px; margin-left:auto; display:none; cursor:pointer; line-height:0; }
+    .nav-toggle-box{ width:28px; height:20px; position:relative; display:inline-block; }
+    .nav-toggle-inner, .nav-toggle-inner::before, .nav-toggle-inner::after{
+      position:absolute; left:0; width:28px; height:2px; background:#000;
+      transition:transform .25s ease, opacity .2s ease;
+    }
+    .nav-toggle-inner{ top:9px; }
+    .nav-toggle-inner::before{ content:""; top:-9px; }
+    .nav-toggle-inner::after{ content:""; top:9px; }
+    .nav-toggle.is-active .nav-toggle-inner{ transform:rotate(45deg); }
+    .nav-toggle.is-active .nav-toggle-inner::before{ transform:translateY(9px) rotate(90deg); }
+    .nav-toggle.is-active .nav-toggle-inner::after{ transform:translateY(-9px) rotate(90deg); opacity:0; }
+
+    .mobile-drawer{
+      position:fixed; top:var(--hdr-h); left:0; right:0;
+      background:#fff; box-shadow:var(--shadow-lg);
+      transform:translateY(-8px); opacity:0; pointer-events:none;
+      transition:transform .2s ease, opacity .2s ease;
+      border-top:3px solid var(--lime); z-index:1100;
+    }
+    .mobile-drawer.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+
+    .mobile-links{ list-style:none; margin:0; padding:10px 14px; }
+    .mobile-links li{ border-bottom:1px solid #efefef; }
+    .mobile-links li:last-child{ border-bottom:none; }
+    .mobile-links a{ display:block; padding:14px 8px; text-decoration:none; font-weight:700; color:#000; transition:color .2s, background .2s; }
+    .mobile-links a:hover{ color:#098276; background:rgba(9,130,118,.06); }
+
+    .mobile-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.28); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:1090; }
+    .mobile-overlay.show{ opacity:1; pointer-events:auto; }
+
+    @media (max-width:900px){
+      .nav-links{ display:none; }
+      .nav-toggle{ display:inline-flex; }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .nav-toggle-inner, .nav-toggle-inner::before, .nav-toggle-inner::after, .mobile-drawer, .mobile-overlay{ transition:none; }
+    }
 
     /* HERO */
     .hero{
@@ -63,7 +110,7 @@
       display:inline-flex; align-items:center; gap:.6rem;
       padding:14px 24px; border-radius:999px; border:0;
       font-weight:700; text-decoration:none; cursor:pointer;
-      line-height:1; /* keeps pill compact */
+      line-height:1;
     }
     .btn-primary{
       background:linear-gradient(180deg,var(--primary),var(--primary-strong));
@@ -156,9 +203,31 @@
         <a href="/pages/privacy-policy/">Privacy Policy</a>
         <a href="/pages/about-us/">About Us</a>
       </nav>
+
+      <!-- ADDED: hamburger button -->
+      <button class="nav-toggle" id="nav-toggle"
+              aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <span class="nav-toggle-box" aria-hidden="true">
+          <span class="nav-toggle-inner"></span>
+        </span>
+      </button>
     </div>
     <div class="lime-bar" aria-hidden="true"></div>
   </header>
+
+  <!-- ADDED: mobile drawer + overlay -->
+  <nav class="mobile-drawer" id="mobile-drawer" hidden>
+    <ul class="mobile-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/partners/">Partners</a></li>
+      <li><a href="/pages/clinics/">Clinics</a></li>
+      <li><a href="/pages/patients/">Patients</a></li>
+      <li><a href="/pages/pay-invoice/">Pay Invoice</a></li>
+      <li><a href="/pages/privacy-policy/">Privacy Policy</a></li>
+      <li><a href="/pages/about-us/">About Us</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-overlay" id="mobile-overlay" hidden></div>
 
   <!-- HERO -->
   <section class="hero" id="home">
@@ -277,6 +346,44 @@
           : '';
       });
     });
+  </script>
+
+  <!-- ADDED: inline hamburger JS -->
+  <script>
+  (function(){
+    const btn = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('mobile-drawer');
+    const overlay = document.getElementById('mobile-overlay');
+    if (!btn || !drawer || !overlay) return;
+
+    function openMenu(){
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-expanded','true');
+      drawer.hidden = false; overlay.hidden = false;
+      requestAnimationFrame(()=>{ drawer.classList.add('open'); overlay.classList.add('show'); });
+      drawer.querySelector('a')?.focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(){
+      btn.classList.remove('is-active');
+      btn.setAttribute('aria-expanded','false');
+      drawer.classList.remove('open'); overlay.classList.remove('show');
+      setTimeout(()=>{ drawer.hidden = true; overlay.hidden = true; }, 180);
+      document.removeEventListener('keydown', onKeydown);
+    }
+    function onKeydown(e){ if (e.key === 'Escape') closeMenu(); }
+
+    btn.addEventListener('click', () =>
+      (btn.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu())
+    );
+    overlay.addEventListener('click', closeMenu);
+    drawer.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
+
+    const mq = window.matchMedia('(min-width: 901px)');
+    const onChange = e => { if (e.matches && btn.getAttribute('aria-expanded') === 'true') closeMenu(); };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+  })();
   </script>
 </body>
 </html>
