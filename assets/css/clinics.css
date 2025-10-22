@@ -201,3 +201,31 @@ body{
   text-decoration: none !important;
   border-bottom: 0 !important;
 }
+/* === Compact icon labels on smaller screens === */
+
+/* tablets */
+@media (max-width: 900px){
+  .icon-strip{ padding:20px; }                 /* tighten the card */
+  .labels{
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap:10px;
+  }
+  .label{ padding:10px 12px; border-radius:10px; }
+  .label span{
+    font-size:.95rem;
+    line-height:1.35;
+    overflow-wrap:anywhere;  /* allow long words to break */
+    hyphens:auto;
+    text-wrap:balance;
+  }
+}
+
+/* phones */
+@media (max-width: 520px){
+  .labels{
+    grid-template-columns: 1fr;  /* single column for readability */
+    gap:8px;
+  }
+  .label{ padding:9px 10px; }
+  .label span{ font-size:.92rem; line-height:1.35; }
+}
