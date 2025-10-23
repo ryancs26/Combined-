@@ -302,9 +302,8 @@
     <h2>Get in touch today</h2>
 
     <!-- Keep action if you have /thank-you page -->
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+    <form name="contact" method="POST" data-netlify="true" action="/thank-you">
       <input type="hidden" name="form-name" value="contact">
-      <p class="visually-hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
       <div>
         <label for="firstName">First name</label>
@@ -343,18 +342,12 @@
         <label for="confirmEmail">Send me a confirmation email</label>
       </div>
 
-      <!-- Netlify reCAPTCHA -->
-      <div class="full recaptcha">
-        <div data-netlify-recaptcha="true"></div>
-      </div>
-
       <div class="full submit-wrap">
         <button type="submit" class="submit-btn">Submit enquiry</button>
       </div>
     </form>
   </div>
 </section>
-
   <!-- CONTACT BY STATE -->
   <section class="contact-section" aria-label="Contact by State">
     <h2>Contact by State</h2>
